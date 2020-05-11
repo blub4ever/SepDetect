@@ -1,5 +1,5 @@
-import {Person} from "./person";
-import {Organization} from "./organization";
+import {Person} from './person';
+import {Organization} from './organization';
 
 export class User {
   personId: number;
@@ -8,5 +8,6 @@ export class User {
   lastLogin: number;
   role: string;
   person: Person;
+  token: string;
   organization: Organization;
 }

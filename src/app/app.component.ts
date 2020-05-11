@@ -1,10 +1,16 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {User} from './model';
+import {AuthenticationService} from '@app/services';
 
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
-})
+@Component({selector: 'app', templateUrl: 'app.component.html'})
 export class AppComponent {
-  title = 'SepDetect';
+  user: User;
+
+  constructor(private authenticationService: AuthenticationService) {
+    this.authenticationService.user.subscribe(x => this.user = x);
+  }
+
+  logout() {
+    this.authenticationService.logout();
+  }
 }
