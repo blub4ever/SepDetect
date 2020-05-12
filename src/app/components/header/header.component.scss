@@ -1,0 +1,43 @@
+@import "./src/global.scss";
+
+.content{
+  width: 100vw;
+  height: 50px;
+  display: grid;
+  grid-template-columns: 40vw 60vw;
+  grid-template-rows: 35px 25px;
+  grid-template-areas:
+    "logo buttons"
+    "current buttons";
+
+  .logo {
+    margin-left: 5px;
+    grid-area: logo;
+    font-size: 1.5em;
+    align-self: center;
+    .first{
+      color: $primary;
+    }
+    .second{
+      color: $secondary;
+    }
+  }
+
+  .title{
+    margin-left: 5px;
+    color: $font-color-light;
+  }
+
+  .header-content{
+    grid-area: buttons;
+    justify-self: right;
+  }
+}
+
+.testc{
+  position: relative;
+  right: 0px;
+  top: 0px;
+  left: auto;
+  width: 100vw;
+}
