@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Patient} from "@app/model";
 import {PatientService} from "@app/services/rest/patient.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-patient-list',
@@ -12,7 +13,8 @@ export class PatientListComponent implements OnInit, AfterViewInit {
   patients: Patient[] = [];
 
   constructor(
-    private patientService: PatientService) {
+    private patientService: PatientService,
+    private router: Router) {
   }
 
   ngOnInit(): void {
@@ -22,7 +24,7 @@ export class PatientListComponent implements OnInit, AfterViewInit {
     // viewChild is set after the view has been initialized
     console.log('AfterViewInit');
     this.patientService.getPatients().subscribe(patients => {
-     this.patients = patients
+      this.patients = patients;
     })
   }
 

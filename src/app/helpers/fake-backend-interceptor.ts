@@ -63,7 +63,23 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 "lastName" : "Test",
                 "gender" : "W"
               }
-          }
+          },
+          {
+            "personId" : 1,
+            "person" : {
+              "surname": "Test",
+              "lastName" : "Test",
+              "gender" : "W"
+            }
+          },
+          {
+            "personId" : 1,
+            "person" : {
+              "surname": "Test",
+              "lastName" : "Test",
+              "gender" : "W"
+            }
+          },
         ]
       )
     }

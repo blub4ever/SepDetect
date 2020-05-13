@@ -15,6 +15,7 @@ import { PatientHeaderComponent } from './components/header/include/patient-head
 import {ButtonModule, InputTextModule, ScrollPanelModule, SlideMenuModule} from "primeng";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { PatientItemComponent } from './components/patient-list/patient-item/patient-item.component';
+import { PatientComponent } from './components/patient/patient.component';
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ import { PatientItemComponent } from './components/patient-list/patient-item/pat
     PatientListComponent,
     HeaderComponent,
     PatientHeaderComponent,
-    PatientItemComponent
+    PatientItemComponent,
+    PatientComponent
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

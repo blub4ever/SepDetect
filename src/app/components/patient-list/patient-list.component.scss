@@ -1,0 +1,32 @@
+.content {
+  margin: auto;
+  display: flex;
+  width: 100vw;
+  height: calc(100vh - 50px);
+  justify-content: center;
+
+  .scroll{
+    margin-top: 20px;
+    justify-self: center;
+    align-self: center;
+    width: 90vw;
+  }
+
+  .ui-scrollpanel-wrapper {
+    border-right: 9px solid #f4f4f4;
+  }
+
+  .ui-scrollpanel-bar {
+    background-color: #1976d2;
+    opacity: 1;
+    transition: background-color .3s;
+  }
+
+  .ui-scrollpanel-bar:hover {
+    background-color: #135ba1;
+  }
+
+  .ui-scrollpanel-content{
+    padding-left: 10px;
+  }
+}
