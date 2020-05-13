@@ -1,3 +1,6 @@
-<div>
-  <app-patient-item [patient]="patient" *ngFor="let patient of patients"></app-patient-item>
+<!-- nav -->
+<app-header></app-header>
+
+<div *ngFor="let patient of patients">
+  <app-patient-item [patient]="patient"></app-patient-item>
 </div>

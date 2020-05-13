@@ -22,7 +22,7 @@ export class PatientListComponent implements OnInit, AfterViewInit {
     // viewChild is set after the view has been initialized
     console.log('AfterViewInit');
     this.patientService.getPatients().subscribe(patients => {
-      this.patients = patients
+     this.patients = patients
     })
   }
 

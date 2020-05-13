@@ -12,7 +12,7 @@ import {fakeBackendProvider} from "@app/helpers/fake-backend-interceptor";
 import { PatientListComponent } from './components/patient-list/patient-list.component';
 import { HeaderComponent } from './components/header/header.component';
 import { PatientHeaderComponent } from './components/header/include/patient-header/patient-header.component';
-import {ButtonModule, InputTextModule, SlideMenuModule} from "primeng";
+import {ButtonModule, InputTextModule, ScrollPanelModule, SlideMenuModule} from "primeng";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { PatientItemComponent } from './components/patient-list/patient-item/patient-item.component';
 
@@ -26,7 +26,8 @@ import { PatientItemComponent } from './components/patient-list/patient-item/pat
     AppRoutingModule,
     InputTextModule,
     ButtonModule,
-    SlideMenuModule
+    SlideMenuModule,
+    ScrollPanelModule
   ],
   declarations: [
     AppComponent,

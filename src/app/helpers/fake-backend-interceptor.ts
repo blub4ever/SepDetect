@@ -10,7 +10,6 @@ import {
 import {Observable, of, throwError} from 'rxjs';
 import {delay, dematerialize, materialize, mergeMap} from 'rxjs/operators';
 import {Patient, Person} from "@app/model";
-import {stringify} from "querystring";
 
 // array in local storage for registered users
 let users = JSON.parse(localStorage.getItem('users')) || [];
@@ -53,9 +52,20 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       arr.push(p);
       arr.push(p);
 
-      const str = JSON.stringify(arr)
+      const str = JSON.stringify(arr);
 
-      return ok({str})
+      return ok(
+        [
+          {
+              "personId" : 1,
+              "person" : {
+                "surname": "Test",
+                "lastName" : "Test",
+                "gender" : "W"
+              }
+          }
+        ]
+      )
     }
 
     // route functions
