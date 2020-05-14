@@ -28,6 +28,7 @@ import { PatientViewSidebarComponent } from './components/sidebar/patient-view-s
 import { PatientEditComponent } from './components/main/patient-edit/patient-edit.component';
 import { ScoreValueInputComponent } from './components/subcomponents/score-value-input/score-value-input.component';
 import { ScoreValueItemComponent } from './components/subcomponents/score-value-item/score-value-item.component';
+import {ScoreValueComponent} from '@app/components/main/score-value/score-value.component';
 
 @NgModule({
   imports: [
@@ -58,6 +59,7 @@ import { ScoreValueItemComponent } from './components/subcomponents/score-value-
     PatientListSidebarComponent,
     PatientViewSidebarComponent,
     PatientEditComponent,
+    ScoreValueComponent,
     ScoreValueInputComponent,
     ScoreValueItemComponent
   ],
