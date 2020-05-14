@@ -12,24 +12,34 @@ import {fakeBackendProvider} from "@app/helpers/fake-backend-interceptor";
 import { PatientListComponent } from './components/patient-list/patient-list.component';
 import { HeaderComponent } from './components/header/header.component';
 import { PatientHeaderComponent } from './components/header/include/patient-header/patient-header.component';
-import {ButtonModule, InputTextModule, ScrollPanelModule, SlideMenuModule} from "primeng";
+import {
+    ButtonModule,
+    CalendarModule,
+    InputTextModule,
+    ScrollPanelModule,
+    SidebarModule,
+    SlideMenuModule
+} from "primeng";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { PatientItemComponent } from './components/patient-list/patient-item/patient-item.component';
 import { PatientComponent } from './components/patient/patient.component';
+import { PatientEditFormComponent } from './components/subcomponents/patient-edit-form/patient-edit-form.component';
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    AppRoutingModule,
-    InputTextModule,
-    ButtonModule,
-    SlideMenuModule,
-    ScrollPanelModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        AppRoutingModule,
+        InputTextModule,
+        ButtonModule,
+        SlideMenuModule,
+        ScrollPanelModule,
+        CalendarModule,
+        SidebarModule
+    ],
   declarations: [
     AppComponent,
     AlertComponent,
@@ -38,7 +48,8 @@ import { PatientComponent } from './components/patient/patient.component';
     HeaderComponent,
     PatientHeaderComponent,
     PatientItemComponent,
-    PatientComponent
+    PatientComponent,
+    PatientEditFormComponent
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

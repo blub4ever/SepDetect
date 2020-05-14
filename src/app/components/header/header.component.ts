@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {filter, map, mergeMap} from "rxjs/operators";
+import {ApplicationService} from "@app/services/application.service";
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,8 @@ export class HeaderComponent implements OnInit {
   pageTitle: string = "";
 
   constructor(private activeRoute: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private applicationService: ApplicationService) {
   }
 
   ngOnInit(): void {
@@ -51,5 +53,9 @@ export class HeaderComponent implements OnInit {
     ).subscribe((event) => {
       this.setTitleFromRouteData(event);
     });
+  }
+
+  public showSidebar() {
+    this.applicationService.showSidebar.emit(true);
   }
 }

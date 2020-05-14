@@ -3,3 +3,7 @@
   <alert></alert>
   <router-outlet></router-outlet>
 </div>
+
+<p-sidebar [(visible)]="sidebarVisible" position="right">
+  <router-outlet name="header-nav"></router-outlet>
+</p-sidebar>

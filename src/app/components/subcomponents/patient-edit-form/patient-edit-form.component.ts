@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {Patient} from "@app/model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Patient} from "@app/model";
 
 @Component({
-  selector: 'app-patient',
-  templateUrl: './patient.component.html',
-  styleUrls: ['./patient.component.scss']
+  selector: 'app-patient-edit-form',
+  templateUrl: './patient-edit-form.component.html',
+  styleUrls: ['./patient-edit-form.component.scss']
 })
-export class PatientComponent implements OnInit {
+export class PatientEditFormComponent implements OnInit {
 
   form: FormGroup;
   patient: Patient;
@@ -18,9 +18,9 @@ export class PatientComponent implements OnInit {
     this.form = this.formBuilder.group({
       lastName: ['', Validators.required],
       surName: ['', Validators.required],
+      piz: ['', Validators.required],
       birthday: ['', Validators.required],
       gender: ['', Validators.required]
     });
   }
-
 }

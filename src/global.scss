@@ -7,6 +7,8 @@ $font: Georgia, serif;
 $font-color-dark: black;
 $font-color-light: $input_background;
 
+$header_height: 60px;
+
   /* PF Button Style*/
 .ui-button{
   background: linear-gradient(90deg, $primary 15px, $input_background 15px);

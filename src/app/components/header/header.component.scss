@@ -2,7 +2,7 @@
 
 .content{
   width: 100vw;
-  height: 50px;
+  height: $header_height;
   display: grid;
   grid-template-columns: 40vw 60vw;
   grid-template-rows: 35px 25px;
