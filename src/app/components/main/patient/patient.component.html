@@ -6,7 +6,7 @@
     <p-dropdown [options]="scores" [(ngModel)]="selectedScore" [style]="{'width':'100%'}"></p-dropdown>
 
     <p-scrollPanel [style]="{width: '100%', height: 'calc( 100vh - 300px )'}" class="scroll">
-      <app-score-value [scoreValue]="scoreValue" *ngFor="let scoreValue of selectedScore.values"></app-score-value>
+      <app-score-value-item [scoreValue]="scoreValue" *ngFor="let scoreValue of selectedScore.values"></app-score-value-item>
     </p-scrollPanel>
 
   </div>

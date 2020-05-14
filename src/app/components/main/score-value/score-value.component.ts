@@ -8,7 +8,7 @@ import {ScoreValue} from '@app/model';
 })
 export class ScoreValueComponent implements OnInit {
 
-  @Input() scoreValue: ScoreValue;
+  @Input() scoreValue: ScoreValue ;
 
   constructor() {
   }

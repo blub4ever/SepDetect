@@ -26,7 +26,8 @@ import { PatientEditFormComponent } from './components/subcomponents/patient-edi
 import { PatientListSidebarComponent } from './components/sidebar/patient-list-sidebar/patient-list-sidebar.component';
 import { PatientViewSidebarComponent } from './components/sidebar/patient-view-sidebar/patient-view-sidebar.component';
 import { PatientEditComponent } from './components/main/patient-edit/patient-edit.component';
-import { ScoreValueComponent } from './components/subcomponents/score-value/score-value.component';
+import { ScoreValueInputComponent } from './components/subcomponents/score-value-input/score-value-input.component';
+import { ScoreValueItemComponent } from './components/subcomponents/score-value-item/score-value-item.component';
 
 @NgModule({
   imports: [
@@ -57,7 +58,8 @@ import { ScoreValueComponent } from './components/subcomponents/score-value/scor
     PatientListSidebarComponent,
     PatientViewSidebarComponent,
     PatientEditComponent,
-    ScoreValueComponent
+    ScoreValueInputComponent,
+    ScoreValueItemComponent
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
