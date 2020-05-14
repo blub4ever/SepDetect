@@ -1,0 +1,12 @@
+@import "src/global";
+
+.container {
+  width: 100vw;
+  .content {
+    margin: 0 auto auto auto;
+    width: 90vw;
+    display: grid;
+    grid-template-columns: 100%;
+    row-gap: 10px;
+  }
+}

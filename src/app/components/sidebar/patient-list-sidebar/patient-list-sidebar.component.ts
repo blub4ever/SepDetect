@@ -1,14 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from './model';
 import {AuthenticationService} from '@app/services';
 import {ApplicationService} from '@app/services/application.service';
 
-@Component({selector: 'app', templateUrl: 'app.component.html'})
-export class AppComponent implements OnInit{
-
-  user: User;
-
-  sidebarVisible: boolean;
+@Component({
+  selector: 'app-patient-list-sidebar',
+  templateUrl: './patient-list-sidebar.component.html',
+  styleUrls: ['./patient-list-sidebar.component.scss']
+})
+export class PatientListSidebarComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -16,13 +15,14 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.authenticationService.user.subscribe(x => this.user = x);
-    this.applicationService.showSidebar.subscribe(show => {
-      this.sidebarVisible = show;
-    });
+  }
+
+  closeOverlay(): void {
+    this.applicationService.showSidebar.emit(false);
   }
 
   logout() {
     this.authenticationService.logout();
+    this.applicationService.showSidebar.emit(false);
   }
 }

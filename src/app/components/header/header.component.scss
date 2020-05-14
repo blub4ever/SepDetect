@@ -4,7 +4,7 @@
   width: 100vw;
   height: $header_height;
   display: grid;
-  grid-template-columns: 40vw 60vw;
+  grid-template-columns: 80vw 20vw;
   grid-template-rows: 35px 25px;
   grid-template-areas:
     "logo buttons"
@@ -31,13 +31,7 @@
   .header-content{
     grid-area: buttons;
     justify-self: right;
+    align-self: center;
+    margin-right: 20px;
   }
-}
-
-.testc{
-  position: relative;
-  right: 0px;
-  top: 0px;
-  left: auto;
-  width: 100vw;
 }

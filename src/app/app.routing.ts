@@ -1,10 +1,13 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {LoginComponent, PatientHeaderComponent} from './components/';
 import {AuthGuard} from './helpers';
-import {PatientListComponent} from "@app/components/patient-list/patient-list.component";
-import {PatientComponent} from "@app/components/patient/patient.component";
+import {PatientListComponent} from "@app/components/main/patient-list/patient-list.component";
+import {PatientComponent} from "@app/components/main/patient/patient.component";
+import {PatientListSidebarComponent} from '@app/components/sidebar/patient-list-sidebar/patient-list-sidebar.component';
+import {LoginComponent} from '@app/components';
+import {PatientViewSidebarComponent} from '@app/components/sidebar/patient-view-sidebar/patient-view-sidebar.component';
+import {PatientEditComponent} from '@app/components/main/patient-edit/patient-edit.component';
 
 const routes: Routes = [
   {
@@ -17,12 +20,12 @@ const routes: Routes = [
       {
         path: '',
         outlet: 'header-nav',
-        component: PatientHeaderComponent
+        component: PatientListSidebarComponent
       }
     ]
   },
   {
-    path: 'patient', canActivate: [AuthGuard], children: [
+    path: 'patient/:id', canActivate: [AuthGuard], children: [
       {
         path: '',
         data: {title: 'Patient'},
@@ -31,7 +34,21 @@ const routes: Routes = [
       {
         path: '',
         outlet: 'header-nav',
-        component: PatientHeaderComponent
+        component: PatientViewSidebarComponent
+      }
+    ]
+  },
+  {
+    path: 'patient/edit/:id', canActivate: [AuthGuard], children: [
+      {
+        path: '',
+        data: {title: 'Patient anlegen/bearbeiten'},
+        component: PatientEditComponent,
+      },
+      {
+        path: '',
+        outlet: 'header-nav',
+        component: PatientViewSidebarComponent
       }
     ]
   },

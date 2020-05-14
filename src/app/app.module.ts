@@ -9,47 +9,55 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from '@app/app.routing';
 import {LoginComponent} from '@app/components';
 import {fakeBackendProvider} from "@app/helpers/fake-backend-interceptor";
-import { PatientListComponent } from './components/patient-list/patient-list.component';
+import { PatientListComponent } from './components/main/patient-list/patient-list.component';
 import { HeaderComponent } from './components/header/header.component';
-import { PatientHeaderComponent } from './components/header/include/patient-header/patient-header.component';
 import {
-    ButtonModule,
-    CalendarModule,
-    InputTextModule,
-    ScrollPanelModule,
-    SidebarModule,
-    SlideMenuModule
-} from "primeng";
+  ButtonModule,
+  CalendarModule, ChartModule, DropdownModule,
+  InputTextModule,
+  ScrollPanelModule,
+  SidebarModule,
+  SlideMenuModule
+} from 'primeng';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import { PatientItemComponent } from './components/patient-list/patient-item/patient-item.component';
-import { PatientComponent } from './components/patient/patient.component';
+import { PatientItemComponent } from './components/subcomponents/patient-item/patient-item.component';
+import { PatientComponent } from './components/main/patient/patient.component';
 import { PatientEditFormComponent } from './components/subcomponents/patient-edit-form/patient-edit-form.component';
+import { PatientListSidebarComponent } from './components/sidebar/patient-list-sidebar/patient-list-sidebar.component';
+import { PatientViewSidebarComponent } from './components/sidebar/patient-view-sidebar/patient-view-sidebar.component';
+import { PatientEditComponent } from './components/main/patient-edit/patient-edit.component';
+import { ScoreValueComponent } from './components/subcomponents/score-value/score-value.component';
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        AppRoutingModule,
-        InputTextModule,
-        ButtonModule,
-        SlideMenuModule,
-        ScrollPanelModule,
-        CalendarModule,
-        SidebarModule
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    InputTextModule,
+    ButtonModule,
+    SlideMenuModule,
+    ScrollPanelModule,
+    CalendarModule,
+    SidebarModule,
+    ChartModule,
+    DropdownModule
+  ],
   declarations: [
     AppComponent,
     AlertComponent,
     LoginComponent,
     PatientListComponent,
     HeaderComponent,
-    PatientHeaderComponent,
     PatientItemComponent,
     PatientComponent,
-    PatientEditFormComponent
+    PatientEditFormComponent,
+    PatientListSidebarComponent,
+    PatientViewSidebarComponent,
+    PatientEditComponent,
+    ScoreValueComponent
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

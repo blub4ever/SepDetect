@@ -1,0 +1,9 @@
+<!-- nav -->
+<app-header></app-header>
+<div class="container">
+  <div class="content">
+    <p-scrollPanel [style]="{width: '100%', height: 'calc(100vh - 70px)'}" class="scroll">
+      <app-patient-item [patient]="patient" *ngFor="let patient of patients"></app-patient-item>
+    </p-scrollPanel>
+  </div>
+</div>

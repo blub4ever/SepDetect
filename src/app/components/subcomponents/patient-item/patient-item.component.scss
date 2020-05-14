@@ -1,0 +1,17 @@
+@import "src/global";
+
+.patientComponent{
+  width: 100%;
+  background: linear-gradient(90deg, $primary 15px, $input_background 15px);
+  color: black;
+  border: 1px $input_border solid;
+  padding-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  display: flex;
+  flex-flow: column;
+
+  .bigFont{
+    font-size: 1.3em;
+  }
+}

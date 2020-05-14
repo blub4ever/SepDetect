@@ -1,5 +1,6 @@
 export class ScoreValue {
   id: number;
+  date: string;
   poa: number;
   gcs: number;
   map: number;
@@ -7,5 +8,5 @@ export class ScoreValue {
   coagulation: number;
   krea: number;
   total: number;
-  listOrder: number
+  listOrder: number;
 }

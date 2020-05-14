@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Patient} from "@app/model";
-import {Router} from "@angular/router";
+import {Patient} from '@app/model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-patient-item',
@@ -17,7 +17,7 @@ export class PatientItemComponent implements OnInit {
   }
 
   goToPatient() {
-    this.router.navigate(['/patient']);
+    this.router.navigate(['/patient', this.patient.personId]);
   }
 
 }

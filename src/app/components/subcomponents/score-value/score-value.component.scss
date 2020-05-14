@@ -1,6 +1,6 @@
-@import "./src/global.scss";
+@import "src/global";
 
-.patientComponent{
+.scoreValueComponent{
   width: 100%;
   background: linear-gradient(90deg, $primary 15px, $input_background 15px);
   color: black;
