@@ -1,9 +1,28 @@
 <div class="component">
-  <div class="title" [innerHTML]="titel">
+  <div class="title" [innerHTML]="titel"></div> <span></span>
+  <div class="selectItem" [ngClass]="{'selectedItem': value === '0'}" (click)="value = '0'">
+    <p-radioButton name="inputGroup{{id}}" value="0" [(ngModel)]="value"></p-radioButton>
+    <span>{{option0}}</span>
+    <span>+0</span>
   </div>
-  <p-radioButton name="inputGroup" value="0" [(ngModel)]="value" label="{{option0}}"></p-radioButton>
-  <p-radioButton name="inputGroup" value="1" [(ngModel)]="value" label="{{option1}}"></p-radioButton>
-  <p-radioButton name="inputGroup" value="2" [(ngModel)]="value" label="{{option2}}"></p-radioButton>
-  <p-radioButton name="inputGroup" value="3" [(ngModel)]="value" label="{{option3}}"></p-radioButton>
-  <p-radioButton name="inputGroup" value="4" [(ngModel)]="value" label="{{option4}}"></p-radioButton>
+  <div class="selectItem" [ngClass]="{'selectedItem': value === '1'}" (click)="value = '1'">
+    <p-radioButton name="inputGroup{{id}}" value="1" [(ngModel)]="value"></p-radioButton>
+    <span>{{option1}}</span>
+    <span>+1</span>
+  </div>
+  <div class="selectItem" [ngClass]="{'selectedItem': value === '2'}" (click)="value = '2'">
+    <p-radioButton name="inputGroup{{id}}" value="2" [(ngModel)]="value"></p-radioButton>
+    <span>{{option2}}</span>
+    <span>+2</span>
+  </div>
+  <div class="selectItem" [ngClass]="{'selectedItem': value === '3'}" (click)="value = '3'">
+    <p-radioButton name="inputGroup{{id}}" value="3" [(ngModel)]="value"></p-radioButton>
+    <span>{{option3}}</span>
+    <span>+3</span>
+  </div>
+  <div class="selectItem" [ngClass]="{'selectedItem': value === '4'}" (click)="value = '4'">
+    <p-radioButton name="inputGroup{{id}}" value="4" [(ngModel)]="value"></p-radioButton>
+    <span>{{option4}}</span>
+    <span>+4</span>
+  </div>
 </div>

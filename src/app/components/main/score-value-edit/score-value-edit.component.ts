@@ -21,4 +21,8 @@ export class ScoreValueEditComponent implements OnInit {
     this.patientId = Number(this.route.snapshot.queryParamMap.get('patientId'));
   }
 
+  goToPatient(){
+    this.router.navigate(['/patient', this.patientId]);
+  }
+
 }

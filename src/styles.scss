@@ -10,3 +10,42 @@ body {
   font-family: $font;
 }
 
+.ui-sidebar {
+  background-color: $background !important;
+  border-color: $input_border !important;
+
+  .buttonElement {
+    width: 100%;
+    background: linear-gradient(90deg, $primary 15px, $input_background 15px);
+    font-size: 1.5em;
+    display: grid;
+    grid-template-columns: 100%;
+    align-content: center;
+    color: $font-color-dark !important;
+    padding-left: 30px;
+  }
+
+  .bottom {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+  }
+
+  .bottom1 {
+    position: fixed;
+    left: 0;
+    bottom: 51px;
+    width: 100%;
+    height: 50px;
+  }
+
+  .bottom2 {
+    position: fixed;
+    left: 0;
+    bottom: 102px;
+    width: 100%;
+    height: 50px;
+  }
+}

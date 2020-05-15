@@ -26,7 +26,16 @@ $header_height: 60px;
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: red;
+  height: 50px;
   color: white;
   text-align: center;
+  justify-content: center;
+  align-content: center;
+  display: grid;
+  grid-template-columns: 50% 50%;
+
+  button{
+    width: 200px;
+    color: #000;
+  }
 }

@@ -10,11 +10,31 @@
   border-radius: 5px;
   grid-row-gap: 5px;
   padding: 5px 15px 15px 15px;
+  margin: 10px 0;
 
-
-  .title{
+  .title {
     justify-self: center;
     font-weight: bold;
     font-size: 1.2em;
+  }
+
+  .item {
+
+  }
+
+  .selectItem {
+    display: grid;
+    grid-template-columns: 10% 83% 7%;
+    width: 100%;
+    border: 1px solid $input_border;
+    border-radius: $border-radius;
+    padding: 4px;
+    align-content: center;
+    justify-content: center;
+  }
+
+  .selectedItem{
+    background-color: $secondary;
+    color: $font-color-light;
   }
 }

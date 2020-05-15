@@ -8,8 +8,9 @@ import {ScoreValue} from '@app/model';
 })
 export class ScoreValueInputComponent implements OnInit {
 
-  value : string;
+  value: string;
 
+  @Input() id: string;
   @Input() titel: string;
   @Input() option0: string;
   @Input() option1: string;
