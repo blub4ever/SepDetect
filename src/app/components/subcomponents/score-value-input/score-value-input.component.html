@@ -1,6 +1,9 @@
-<div>
-  <p-radioButton name="inputGroup" value="0" [(ngModel)]="value"></p-radioButton>
-  <p-radioButton name="inputGroup" value="1" [(ngModel)]="value"></p-radioButton>
-  <p-radioButton name="inputGroup" value="2" [(ngModel)]="value"></p-radioButton>
-  <p-radioButton name="inputGroup" value="3" [(ngModel)]="value"></p-radioButton>
+<div class="component">
+  <div class="title" [innerHTML]="titel">
+  </div>
+  <p-radioButton name="inputGroup" value="0" [(ngModel)]="value" label="{{option0}}"></p-radioButton>
+  <p-radioButton name="inputGroup" value="1" [(ngModel)]="value" label="{{option1}}"></p-radioButton>
+  <p-radioButton name="inputGroup" value="2" [(ngModel)]="value" label="{{option2}}"></p-radioButton>
+  <p-radioButton name="inputGroup" value="3" [(ngModel)]="value" label="{{option3}}"></p-radioButton>
+  <p-radioButton name="inputGroup" value="4" [(ngModel)]="value" label="{{option4}}"></p-radioButton>
 </div>

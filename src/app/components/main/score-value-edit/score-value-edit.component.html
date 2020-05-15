@@ -1,0 +1,14 @@
+<app-header></app-header>
+<div class="container">
+  <div class="content">
+    <p-scrollPanel [style]="{width: '100%', height: 'calc( 100vh - 60px )'}" class="scroll" t>
+      <app-score-value-input titel="PaO<sub>2</sub>/FiO<sub>2</sub>" [option0]="'> 400'" [option1]="'< 400'" [option2]="'< 300'" [option3]="'< 200 und Beatmung'" [option4]="'< 100 und Beatmung'"></app-score-value-input>
+    </p-scrollPanel>
+  </div>
+</div>
+
+<div class="footer">
+  <p-button label="Speichern"></p-button>
+  <p-button label="Zurück"></p-button>
+</div>
+

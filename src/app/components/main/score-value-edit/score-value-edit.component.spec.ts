@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ScoreValueComponent } from './score-value.component';
+import { ScoreValueEditComponent } from './score-value.component';
 
 describe('ScoreValueComponent', () => {
-  let component: ScoreValueComponent;
-  let fixture: ComponentFixture<ScoreValueComponent>;
+  let component: ScoreValueEditComponent;
+  let fixture: ComponentFixture<ScoreValueEditComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ScoreValueComponent ]
+      declarations: [ ScoreValueEditComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ScoreValueComponent);
+    fixture = TestBed.createComponent(ScoreValueEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

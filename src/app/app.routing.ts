@@ -8,7 +8,8 @@ import {PatientListSidebarComponent} from '@app/components/sidebar/patient-list-
 import {LoginComponent} from '@app/components';
 import {PatientViewSidebarComponent} from '@app/components/sidebar/patient-view-sidebar/patient-view-sidebar.component';
 import {PatientEditComponent} from '@app/components/main/patient-edit/patient-edit.component';
-import {ScoreValueComponent} from '@app/components/main/score-value/score-value.component';
+import {ScoreValueEditComponent} from '@app/components/main/score-value-edit/score-value-edit.component';
+import {ScoreValueEditSidebarComponent} from "@app/components/sidebar/score-value-edit-sidebar/score-value-edit-sidebar.component";
 
 const routes: Routes = [
   {
@@ -54,16 +55,16 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'patient/score', canActivate: [AuthGuard], children: [
+    path: 'score', canActivate: [AuthGuard], children: [
       {
         path: '',
-        data: {title: 'Patient anlegen/bearbeiten'},
-        component: ScoreValueComponent,
+        data: {title: 'Score bearbeiten'},
+        component: ScoreValueEditComponent,
       },
       {
         path: '',
         outlet: 'header-nav',
-        component: PatientViewSidebarComponent
+        component: ScoreValueEditSidebarComponent
       }
     ]
   },

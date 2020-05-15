@@ -1,0 +1,20 @@
+@import "src/global";
+
+.component {
+  width: 100%;
+  background-color: $input_background;
+  display: grid;
+  grid-template-columns: 100%;
+  color: black;
+  border: 1px $input_border solid;
+  border-radius: 5px;
+  grid-row-gap: 5px;
+  padding: 5px 15px 15px 15px;
+
+
+  .title{
+    justify-self: center;
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+}

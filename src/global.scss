@@ -6,6 +6,7 @@ $secondary: #e74b51;
 $font: Georgia, serif;
 $font-color-dark: black;
 $font-color-light: $input_background;
+$border-radius: 3px;
 
 $header_height: 60px;
 
@@ -18,4 +19,14 @@ $header_height: 60px;
 
 .ui-inputtext{
   border: $input_border;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  color: white;
+  text-align: center;
 }

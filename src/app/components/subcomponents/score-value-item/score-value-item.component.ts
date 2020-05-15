@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ScoreValue} from '@app/model';
+import {Patient, ScoreValue} from '@app/model';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-score-value-item',
@@ -9,10 +10,17 @@ import {ScoreValue} from '@app/model';
 export class ScoreValueItemComponent implements OnInit {
 
   @Input() scoreValue: ScoreValue;
+  @Input() patient: Patient;
 
-  constructor() { }
+  constructor(private router: Router) {
+  }
 
   ngOnInit(): void {
   }
 
+  goToScoreEdit() {
+    console.log(this.patient);
+    console.log(this.scoreValue);
+    this.router.navigate(['score'], {queryParams: {scoreValueId: this.scoreValue.id, patientId: this.patient.personId}})
+  }
 }

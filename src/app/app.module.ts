@@ -14,7 +14,7 @@ import { HeaderComponent } from './components/header/header.component';
 import {
   ButtonModule,
   CalendarModule, ChartModule, DropdownModule,
-  InputTextModule,
+  InputTextModule, RadioButtonModule,
   ScrollPanelModule,
   SidebarModule,
   SlideMenuModule
@@ -28,7 +28,8 @@ import { PatientViewSidebarComponent } from './components/sidebar/patient-view-s
 import { PatientEditComponent } from './components/main/patient-edit/patient-edit.component';
 import { ScoreValueInputComponent } from './components/subcomponents/score-value-input/score-value-input.component';
 import { ScoreValueItemComponent } from './components/subcomponents/score-value-item/score-value-item.component';
-import {ScoreValueComponent} from '@app/components/main/score-value/score-value.component';
+import { ScoreValueEditSidebarComponent } from './components/sidebar/score-value-edit-sidebar/score-value-edit-sidebar.component';
+import {ScoreValueEditComponent} from "@app/components/main/score-value-edit/score-value-edit.component";
 
 @NgModule({
   imports: [
@@ -45,7 +46,8 @@ import {ScoreValueComponent} from '@app/components/main/score-value/score-value.
     CalendarModule,
     SidebarModule,
     ChartModule,
-    DropdownModule
+    DropdownModule,
+    RadioButtonModule
   ],
   declarations: [
     AppComponent,
@@ -59,9 +61,10 @@ import {ScoreValueComponent} from '@app/components/main/score-value/score-value.
     PatientListSidebarComponent,
     PatientViewSidebarComponent,
     PatientEditComponent,
-    ScoreValueComponent,
+    ScoreValueEditComponent,
     ScoreValueInputComponent,
-    ScoreValueItemComponent
+    ScoreValueItemComponent,
+    ScoreValueEditSidebarComponent
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
