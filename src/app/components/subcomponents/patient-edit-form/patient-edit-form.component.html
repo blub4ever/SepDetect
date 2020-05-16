@@ -1,7 +1,19 @@
-<form [formGroup]="form" class="formContent">
-  <input id="float-input1" type="text" pInputText formControlName="lastName" placeholder="Nachname" class="inputFiled">
-  <input id="float-input2" type="text" pInputText formControlName="surName" placeholder="Vorname" class="inputFiled">
-  <input id="float-input4" type="text" pInputText formControlName="piz" placeholder="Piz" class="inputFiled">
-  <p-calendar formControlName="birthday" [monthNavigator]="true" [yearNavigator]="true" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" class="inputFiled"></p-calendar >
-  <input id="float-input5" type="text" pInputText formControlName="gender" placeholder="Geschlecht" class="inputFiled">
-</form>
+<div class="formContent">
+  <input id="float-input1" type="text" pInputText [(ngModel)]="lastName" placeholder="Nachname" class="inputFiled"
+         [ngClass]="{'invalid': lastNameValid}">
+  <input id="float-input2" type="text" pInputText [(ngModel)]="surName" placeholder="Vorname" class="inputFiled"
+         [ngClass]="{'invalid': surNameValid}">
+  <input id="float-input4" type="text" pInputText [(ngModel)]="piz" placeholder="Piz" class="inputFiled"
+         [ngClass]="{'invalid': pizValid}">
+  <p-calendar [(ngModel)]="birthday" [monthNavigator]="true" [yearNavigator]="true" [style]="{'width':'100%'}"
+              [inputStyle]="{'width':'100%'}" class="inputFiled" placeholder="Geburtstag"
+              [ngClass]="{'invalid': birthdayValid}">></p-calendar>
+  <p-dropdown [options]="genders" [(ngModel)]="gender" class="inputFiled" [style]="{'width':'100%'}"
+              [ngClass]="{'invalid': genderValid}"></p-dropdown>
+  <input id="float-input5" type="text" pInputText [(ngModel)]="room" placeholder="Raum" class="inputFiled"
+         [ngClass]="{'invalid': roomValid}">
+  <p-dropdown [options]="organizations" [(ngModel)]="selectedOrganization" class="inputFiled" [style]="{'width':'100%'}"
+              [ngClass]="{'invalid': organizationValid}">></p-dropdown>
+
+</div>
+

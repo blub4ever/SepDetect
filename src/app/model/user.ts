@@ -9,5 +9,5 @@ export class User {
   role: string;
   person: Person;
   token: string;
-  organization: Organization;
+  organization: Organization[];
 }

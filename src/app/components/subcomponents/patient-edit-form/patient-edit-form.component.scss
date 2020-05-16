@@ -1,9 +1,16 @@
-.formContent{
+@import "src/global";
+
+.formContent {
   display: flex;
   flex-direction: column;
 
-  .inputFiled{
+  .inputFiled {
     margin: 5px 0;
+    width: 100%;
+  }
+
+  .invalid {
+    border: 1px solid $secondary;
   }
 }
 

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ApplicationService} from '@app/services/application.service';
 import {AuthenticationService} from '@app/services';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-patient-view-sidebar',
@@ -10,13 +10,17 @@ import {Router} from '@angular/router';
 })
 export class PatientViewSidebarComponent implements OnInit {
 
+  patientId: number;
+
   constructor(
     private applicationService: ApplicationService,
     private router: Router,
+    private route: ActivatedRoute,
     private authenticationService: AuthenticationService) {
   }
 
   ngOnInit(): void {
+    this.patientId = Number(this.route.snapshot.paramMap.get('id'))
   }
 
   closeOverlay(): void {
@@ -25,6 +29,11 @@ export class PatientViewSidebarComponent implements OnInit {
 
   goToPatient() {
     this.router.navigate(['patients']);
+    this.applicationService.showSidebar.emit(false);
+  }
+
+  goToNewScore() {
+    this.router.navigate(['score'], {queryParams: {scoreValueId: 0, patientId: this.patientId}});
     this.applicationService.showSidebar.emit(false);
   }
 

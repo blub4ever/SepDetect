@@ -6,27 +6,33 @@ import {map} from 'rxjs/operators';
 
 import {environment} from '@environments/environment';
 import {User} from '@app/model';
+import {UserAuth} from "@app/model/user-auth";
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
-  private userSubject: BehaviorSubject<User>;
-  public user: Observable<User>;
+  private userSubject: BehaviorSubject<UserAuth>;
+  public user: Observable<UserAuth>;
 
   constructor(
     private router: Router,
     private http: HttpClient
   ) {
-    this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
+    this.userSubject = new BehaviorSubject<UserAuth>(JSON.parse(localStorage.getItem('user')));
     this.user = this.userSubject.asObservable();
   }
 
-  public get userValue(): User {
+  public get userAuth(): UserAuth {
     return this.userSubject.value;
   }
 
+  public get userValue(): User {
+    return this.userSubject.value.user;
+  }
+
   login(username, password) {
-    return this.http.post<User>(`${environment.apiUrl}/login`, {name: username, pw: password})
+    return this.http.post<UserAuth>(`${environment.apiUrl}/login`, {name: username, pw: password})
       .pipe(map(user => {
+        console.log(user)
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('user', JSON.stringify(user));
         this.userSubject.next(user);

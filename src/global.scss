@@ -20,22 +20,3 @@ $header_height: 60px;
 .ui-inputtext{
   border: $input_border;
 }
-
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 50px;
-  color: white;
-  text-align: center;
-  justify-content: center;
-  align-content: center;
-  display: grid;
-  grid-template-columns: 50% 50%;
-
-  button{
-    width: 200px;
-    color: #000;
-  }
-}
