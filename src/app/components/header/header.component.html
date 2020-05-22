@@ -3,7 +3,10 @@
     <label class="first">Sep</label>
     <label class="second">Detect</label>
   </div>
-  <div class="title">{{pageTitle}}</div>
+  <div class="title">
+    <div [innerHTML]="pageTitle"></div>
+    <div [innerHTML]="pageTitle2" class="subTitle"></div>
+  </div>
   <div class="header-content">
     <i class="pi pi-bars" (click)="showSidebar()"></i>
   </div>

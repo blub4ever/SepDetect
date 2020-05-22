@@ -5,7 +5,7 @@
   height: $header_height;
   display: grid;
   grid-template-columns: 80vw 20vw;
-  grid-template-rows: 35px 25px;
+  grid-template-rows: 35px 40px;
   grid-template-areas:
     "logo buttons"
     "current buttons";
@@ -26,6 +26,10 @@
   .title{
     margin-left: 5px;
     color: $font-color-light;
+
+    .subTitle{
+      font-size: 0.8em;
+    }
   }
 
   .header-content{
@@ -33,6 +37,6 @@
     justify-self: right;
     align-self: center;
     margin-right: 20px;
-    color: $input_background;
+    color: $background-light-color;
   }
 }

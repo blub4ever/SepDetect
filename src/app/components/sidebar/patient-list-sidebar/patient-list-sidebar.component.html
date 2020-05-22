@@ -1,7 +1,15 @@
-<div class="bottom1 buttonElement" (click)="goToEditPatient()">
-  NeuerPatient
+<div class="buttonContainer">
+  <div class="buttonElement" (click)="nav.goToEditPatient(0)">
+    Neuer Patient
+  </div>
+  <div class="buttonElement" (click)="nav.goToSearchPatient()">
+    Patient suchen
+  </div>
+  <div class="buttonSpacer"></div>
+  <div class="buttonElement" (click)="nav.goToAbout()">
+    About
+  </div>
+  <div class="buttonElement" (click)="nav.logout()">
+    Logout
+  </div>
 </div>
-<div class="bottom buttonElement" (click)="logout()">
-  Logout
-</div>
-

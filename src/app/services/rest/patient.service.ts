@@ -25,4 +25,20 @@ export class PatientService extends AbstractHttpService {
   createPatient(patient: Patient) {
     return this.http.post<Patient>(`${environment.apiUrl}/patient/add`, patient, PatientService.httpJsonContent);
   }
+
+  editPatient(patient: Patient) {
+    return this.http.put<Patient>(`${environment.apiUrl}/patient/edit`, patient, PatientService.httpJsonContent);
+  }
+
+  deletePatient(patientID: number): Observable<string> {
+    return this.http.delete<string>(`${environment.apiUrl}/patient/delete/${patientID}`);
+  }
+
+  findPatients(lastName: string, surname: string, birthday: string, gender: string): Observable<Patient[]> {
+    return this.http.get<Patient[]>(`${environment.apiUrl}/patient/search?lastname=${btoa(lastName)}&surname=${btoa(surname)}&birthday=${btoa(birthday)}&gender=${gender}`);
+  }
+
+  togglePatientActiveStatus(patientId: number, active: boolean): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/patient/active/${patientId}?active=${active}`);
+  }
 }

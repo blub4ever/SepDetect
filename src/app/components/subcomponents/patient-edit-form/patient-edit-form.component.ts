@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Organization, Patient} from "@app/model";
 import {SelectItem} from "primeng";
@@ -12,29 +12,22 @@ import {AuthenticationService} from "@app/services";
 })
 export class PatientEditFormComponent implements OnInit {
 
-  lastName: string;
-  lastNameValid: boolean = false;
+  /**
+   * FormGroup enthält die Input-Elemente
+   */
+  form: FormGroup;
 
-  surName: string;
-  surNameValid: boolean = false;
+  /**
+   * Wird wahr wenn der Submit-Button gedrückt wird. Sind die Input-Felder nicht korrekt ausgefüllt, wird ein Fehler
+   * angezeigt.
+   */
+  submitted = false;
 
-  piz: string;
-  pizValid: boolean = false;
-
-  birthday: string;
-  birthdayValid: boolean = false;
-
-  gender: string = '?';
-  genderValid: boolean = false;
   genders: SelectItem[];
 
-  room: string;
-  roomValid: boolean = false;
-
-  selectedOrganization: Organization = null;
   organizations: SelectItem[];
-  organizationValid: boolean = false
 
+  @Input("patient")
   patient: Patient;
 
   constructor(private formBuilder: FormBuilder,
@@ -42,6 +35,21 @@ export class PatientEditFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // baue form mit username und password
+    this.form = this.formBuilder.group({
+      lastName: ['', Validators.required],
+      surName: ['', Validators.required],
+      piz: ['', Validators.required],
+      birthday: ['', Validators.required],
+      gender: ['', Validators.required],
+      room: ['', Validators.required],
+      organization: ['', Validators.required]
+    });
+
+    this.form.controls.birthday.valueChanges.subscribe(x => {
+      console.log(x)
+    })
+
     this.genders = [
       {label: 'Unbekannt Geschlecht', value: "?"},
       {label: 'Männlich', value: "M"},
@@ -51,7 +59,7 @@ export class PatientEditFormComponent implements OnInit {
 
     const organizations = this.authenticationService.userValue.organization;
     this.organizations = [
-      {label: 'Auswählen', value: null}
+      {label: 'Organisationseinheit Auswählen', value: null}
     ]
 
     for (const organization of organizations) {
@@ -59,58 +67,12 @@ export class PatientEditFormComponent implements OnInit {
     }
   }
 
-  validate(): boolean {
-    let result = true;
-
-    if (this.lastName == undefined || this.lastName == '') {
-      result = false;
-      this.lastNameValid = true;
-    } else {
-      this.lastNameValid = false;
+  submit(): boolean {
+    this.submitted = true
+    // stop, falls es Fehler beim Ausfüllen der Eingabefelder gab
+    if (this.form.invalid) {
+      return false;
     }
-
-    if (this.surName == undefined || this.surName == '') {
-      result = false;
-      this.surNameValid = true;
-    } else {
-      this.surNameValid = false;
-    }
-
-    if (this.piz == undefined || this.piz == '') {
-      result = false;
-      this.pizValid = true;
-    } else {
-      this.pizValid = false;
-    }
-
-    if (this.birthday == undefined) {
-      result = false;
-      this.birthdayValid = true;
-    } else {
-      this.birthdayValid = false;
-    }
-
-    if (this.gender == undefined) {
-      result = false;
-      this.genderValid = true;
-    } else {
-      this.genderValid = false;
-    }
-
-    if (this.room == undefined) {
-      result = false;
-      this.roomValid = true;
-    } else {
-      this.roomValid = false;
-    }
-
-    if(this.selectedOrganization == null){
-      result = false;
-      this.organizationValid = true;
-    }else{
-      this.organizationValid = false;
-    }
-
-    return result
+    return true
   }
 }

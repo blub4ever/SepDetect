@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {filter, map, mergeMap} from "rxjs/operators";
-import {ApplicationService} from "@app/services/application.service";
+import {AppNavigationService} from "@app/services/app-navigation.service";
 
 @Component({
   selector: 'app-header',
@@ -10,11 +10,14 @@ import {ApplicationService} from "@app/services/application.service";
 })
 export class HeaderComponent implements OnInit {
 
-  pageTitle: string = "";
+  @Input()
+  pageTitle: string = '';
+  @Input()
+  pageTitle2: string = '';
 
   constructor(private activeRoute: ActivatedRoute,
-              private router: Router,
-              private applicationService: ApplicationService) {
+              private nav : AppNavigationService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -22,10 +25,8 @@ export class HeaderComponent implements OnInit {
   }
 
   private setTitleFromRouteData(routeData) {
-    if (routeData && routeData['title']) {
+    if (routeData && routeData['title'] && this.pageTitle == undefined) {
       this.pageTitle = routeData['title'];
-    } else {
-      this.pageTitle = '';
     }
   }
 
@@ -56,6 +57,6 @@ export class HeaderComponent implements OnInit {
   }
 
   public showSidebar() {
-    this.applicationService.showSidebar.emit(true);
+    this.nav.showSidebar.emit(true);
   }
 }

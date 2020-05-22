@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {Patient} from '@app/model';
 import {Router} from '@angular/router';
+import {AppNavigationService} from "@app/services";
 
 @Component({
   selector: 'app-patient-item',
@@ -9,15 +10,19 @@ import {Router} from '@angular/router';
 })
 export class PatientItemComponent implements OnInit {
 
-  @Input() patient: Patient;
+  @Input()
+  patient: Patient;
 
-  constructor(private router: Router) { }
+  @Input()
+  details: boolean = true
+
+  constructor(public nav: AppNavigationService) {
+  }
 
   ngOnInit(): void {
   }
 
-  goToPatient() {
-    this.router.navigate(['/patient', this.patient.personId]);
+  @HostListener('click', ['$event'])
+  onClick(e) {
   }
-
 }

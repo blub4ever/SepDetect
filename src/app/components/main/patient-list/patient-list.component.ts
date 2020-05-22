@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Patient} from "@app/model";
 import {PatientService} from "@app/services/rest/patient.service";
 import {Router} from "@angular/router";
+import {AppNavigationService} from "@app/services";
 
 @Component({
   selector: 'app-patient-list',
@@ -14,6 +15,7 @@ export class PatientListComponent implements OnInit, AfterViewInit {
 
   constructor(
     private patientService: PatientService,
+    public nav : AppNavigationService,
     private router: Router) {
   }
 
@@ -26,6 +28,10 @@ export class PatientListComponent implements OnInit, AfterViewInit {
     this.patientService.getPatients().subscribe(patients => {
       this.patients = patients;
     })
+  }
+
+  test(){
+    console.log('test')
   }
 
 }

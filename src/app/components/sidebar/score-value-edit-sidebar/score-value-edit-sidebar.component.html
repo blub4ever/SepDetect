@@ -1,1 +1,19 @@
-<p>{{patientId}}</p>
+<div class="buttonContainer">
+  <div class="buttonElement" (click)="deleteScoreValue()">
+    Eintrag Löschen
+  </div>
+  <div class="buttonSpacer"></div>
+  <div class="buttonElement" (click)="nav.goToPatientView(patientId)">
+    Patient
+  </div>
+  <div class="buttonElement" (click)="nav.goToPatients()">
+    Patienten Liste
+  </div>
+  <div class="buttonSpacer"></div>
+  <div class="buttonElement" (click)="nav.goToAbout()">
+    About
+  </div>
+  <div class="buttonElement" (click)="nav.logout()">
+    Logout
+  </div>
+</div>

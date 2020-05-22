@@ -1,31 +1,45 @@
 <app-header></app-header>
 <div class="container">
   <div class="content">
-    <p-scrollPanel [style]="{width: '100%', height: 'calc( 100vh - 120px )'}" class="scroll">
-      <app-score-value-input id="'0'" titel="PaO<sub>2</sub>/FiO<sub>2</sub>" [option0]="'> 400'" [option1]="'< 400'"
+
+    <carousel #carouselComponent>
+      <app-score-value-input id="'0'" titel="PaO<sub>2</sub>/FiO<sub>2</sub>" [option0]="'> 400'" *carouselItem
+                             [option1]="'< 400'"
                              [option2]="'< 300'" [option3]="'< 200 und Beatmung'"
-                             [option4]="'< 100 und Beatmung'" #poa_input></app-score-value-input>
-      <app-score-value-input id="'1'" titel="Glasgow Coma Score" [option0]="'15'" [option1]="'13 - 14'"
-                             [option2]="'10 - 12'" [option3]="'6 - 9'" [option4]="'< 6'" #gcs_input></app-score-value-input>
+                             [option4]="'< 100 und Beatmung'" #score_input></app-score-value-input>
+      <app-score-value-input id="'1'" titel="Glasgow Coma Score" [option0]="'15'" [option1]="'13 - 14'" *carouselItem
+                             [option2]="'10 - 12'" [option3]="'6 - 9'" [option4]="'< 6'"
+                             #score_input></app-score-value-input>
       <app-score-value-input id="'2'" titel="Mittlerer arterieller Blutdruck (MAP) oder Einsatz von Vasopressoren"
-                             [option0]="'MAP > 70, kein Dopamin, Adrenalin, Noradrenalin'" [option1]="'MAP < 70 mmHg'"
+                             *carouselItem
+                             [option0]="'MAP > 70, kein Dopamin, Adrenalin, Noradrenalin'"
+                             [option1]="'MAP < 70 mmHg'"
                              [option2]="'Dopamin < 5 µg/kg/min oder Dobutamin (Dosierung egal)'"
                              [option3]="'Dopamin > 5 µg/kg/min oder Adrenalin/Noradrenalin < 0,1 µg/kg/min'"
-                             [option4]="'Dopamin > 15 µm/kg/min oder Adrenalin/Noradrenalin > 0,1 µm/kg/min'" #map_input></app-score-value-input>
-      <app-score-value-input id="'3'" titel="Bilirubin mg/dl" [option0]="'< 1,2 mg/dl'" [option1]="'1,2 - 1,9 mg/dl'"
+                             [option4]="'Dopamin > 15 µm/kg/min oder Adrenalin/Noradrenalin > 0,1 µm/kg/min'"
+                             #score_input></app-score-value-input>
+      <app-score-value-input id="'3'" titel="Bilirubin mg/dl" [option0]="'< 1,2 mg/dl'" *carouselItem
+                             [option1]="'1,2 - 1,9 mg/dl'"
                              [option2]="'2,0 - 5,9 mg/dl'" [option3]="'6,0 - 11,9 mg/dl'"
-                             [option4]="'> 12,0 mg/dl'" #liver_input></app-score-value-input>
-      <app-score-value-input id="'4'" titel="Thrombozyten x 10<sup>3</sup>/µl" [option0]="'>= 150'" [option1]="'< 150'"
-                             [option2]="'< 100'" [option3]="'< 50'" [option4]="'< 20'" #coagulation_input></app-score-value-input>
-      <app-score-value-input id="'5'" titel="Kreatinin mg/dl" [option0]="'< 1,2 mg/dl'" [option1]="'1,2 - 1,9 mg/dl'"
+                             [option4]="'> 12,0 mg/dl'" #score_input></app-score-value-input>
+      <app-score-value-input id="'4'" titel="Thrombozyten x 10<sup>3</sup>/µl" [option0]="'>= 150'" *carouselItem
+                             [option1]="'< 150'"
+                             [option2]="'< 100'" [option3]="'< 50'" [option4]="'< 20'"
+                             #score_input></app-score-value-input>
+      <app-score-value-input id="'5'" titel="Kreatinin mg/dl" [option0]="'< 1,2 mg/dl'" *carouselItem
+                             [option1]="'1,2 - 1,9 mg/dl'"
                              [option2]="'2,0 - 3,4 mg/dl'" [option3]="'3,5 - 4,9 mg/dl'"
-                             [option4]="'> 5 mg/dl'" #krea_input></app-score-value-input>
-    </p-scrollPanel>
+                             [option4]="'> 5 mg/dl'" #score_input></app-score-value-input>
+    </carousel>
+
+    <p-steps [model]="items" [readonly]="false" [(activeIndex)]="activeIndex" styleClass="sofa_steps"
+             (activeIndexChange)="onActiveIndexChanged($event)"></p-steps>
   </div>
 </div>
 
 <div class="footer">
-  <button pButton label="Speichern" [style]="{width: '150px'}" (click)="createNewScoreValue()" ></button>
-  <button pButton label="Abbrechen" [style]="{width: '150px'}" (click)="goToPatient()"></button>
+  <button pButton label="Speichern" [style]="{width: '150px'}" (click)="createNewScoreValue()"
+          [disabled]="!saveAble"></button>
+  <button pButton label="Abbrechen" [style]="{width: '150px'}" (click)="nav.goToPatientView(patientId)"></button>
 </div>
 

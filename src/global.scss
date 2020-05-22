@@ -1,18 +1,21 @@
 $background: #374757;
-$input_background: #e8f0fe;
+$background-light-color: #e8f0fe;
+
+$font-color-dark: black;
+$font-color-light: $background-light-color;
+
+
 $input_border: #49565f;
 $primary: #60d7d3;
 $secondary: #e74b51;
 $font: Georgia, serif;
-$font-color-dark: black;
-$font-color-light: $input_background;
 $border-radius: 3px;
 
-$header_height: 60px;
+$header_height: 75px;
 
   /* PF Button Style*/
 .ui-button{
-  background: linear-gradient(90deg, $primary 15px, $input_background 15px);
+  background: linear-gradient(90deg, $primary 15px, $background-light-color 15px);
   color: black;
   border-color: $input_border;
 }

@@ -1,25 +1,51 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from './model';
 import {AuthenticationService} from '@app/services';
-import {ApplicationService} from '@app/services/application.service';
+import {NavigationStart, Router} from "@angular/router";
+import {Subscription} from "rxjs";
+import {MessageService} from "primeng";
+import {AppNavigationService} from "@app/services/app-navigation.service";
 
 @Component({selector: 'app', templateUrl: 'app.component.html'})
-export class AppComponent implements OnInit{
+/**
+ * Haupt App-Komponente
+ */
+export class AppComponent implements OnInit {
 
-  user: User;
-
+  /**
+   * Wenn wahr, wird die SideBare angezeigt. (Navigation)
+   */
   sidebarVisible: boolean;
 
+  /**
+   * Routing Subsciption, wird für unsubscribe beim Zerstören der Komponente benötigt.
+   */
+  routeSubscription: Subscription;
+
   constructor(
+    private nav : AppNavigationService,
     private authenticationService: AuthenticationService,
-    private applicationService: ApplicationService) {
+    private router: Router,
+    private messageService: MessageService) {
   }
 
   ngOnInit(): void {
-    this.authenticationService.user.subscribe(x => this.user = x);
-    this.applicationService.showSidebar.subscribe(show => {
+    this.nav.showSidebar.subscribe(show => {
       this.sidebarVisible = show;
     });
+
+    // clear alerts on location change
+    this.routeSubscription = this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        this.messageService.clear();
+        this.sidebarVisible = false;
+      }
+    });
+  }
+
+  // unsubscribe to avoid memory leaks
+  ngOnDestroy() {
+    this.routeSubscription.unsubscribe();
   }
 
   logout() {

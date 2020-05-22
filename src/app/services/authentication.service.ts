@@ -29,7 +29,7 @@ export class AuthenticationService {
     return this.userSubject.value.user;
   }
 
-  login(username, password) {
+  login(username, password) : Observable<UserAuth>{
     return this.http.post<UserAuth>(`${environment.apiUrl}/login`, {name: username, pw: password})
       .pipe(map(user => {
         console.log(user)

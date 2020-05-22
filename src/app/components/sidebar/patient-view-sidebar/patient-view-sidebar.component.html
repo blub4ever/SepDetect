@@ -1,10 +1,29 @@
-<div class="bottom2 buttonElement" (click)="goToPatient()">
-  Übersicht
+<div class="buttonContainer">
+  <div class="buttonElement" (click)="nav.goToEditScoreValue(0,patientId)">
+    SOFA-Score eintragen
+  </div>
+  <div class="buttonElement" (click)="endSofaHistory()">
+    SOFA-Verlauf beenden
+  </div>
+  <div class="buttonSpacer"></div>
+  <div class="buttonElement" (click)="nav.goToEditPatient(patientId)">
+    Patient bearbeiten
+  </div>
+  <div class="buttonElement" (click)="inactivatePatient()">
+    Patient archivieren
+  </div>
+  <div class="buttonElement" (click)="deletePatient()">
+    Patient löschen
+  </div>
+  <div class="buttonSpacer"></div>
+  <div class="buttonElement" (click)="nav.goToPatients()">
+    Patienten Liste
+  </div>
+  <div class="buttonSpacer"></div>
+  <div class="buttonElement" (click)="nav.goToAbout()">
+    About
+  </div>
+  <div class="buttonElement" (click)="nav.logout()">
+    Logout
+  </div>
 </div>
-<div class="bottom1 buttonElement" (click)="goToNewScore()">
-  Neuer Eintrag
-</div>
-<div class="bottom buttonElement" (click)="logout()">
-  Logout
-</div>
-

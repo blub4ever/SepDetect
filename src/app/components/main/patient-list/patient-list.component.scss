@@ -1,3 +1,5 @@
+@import "src/global";
+
 .container {
   width: 100vw;
 
@@ -27,6 +29,13 @@
 
     .ui-scrollpanel-content {
       padding-left: 10px;
+    }
+
+    .noPatients{
+      color: $font-color-light;
+      margin-top: 10em;
+      width: auto;
+      text-align: center;
     }
   }
 }

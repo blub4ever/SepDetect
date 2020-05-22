@@ -3,7 +3,10 @@
 <div class="container">
   <div class="content">
     <p-scrollPanel [style]="{width: '100%', height: 'calc(100vh - 70px)'}" class="scroll">
-      <app-patient-item [patient]="patient" *ngFor="let patient of patients"></app-patient-item>
+      <div *ngIf="patients.length == 0" class="noPatients">
+        Keine Patienten vorhanden...
+      </div>
+      <app-patient-item [patient]="patient" *ngFor="let patient of patients" (click)="nav.goToPatientView(patient.personId)"></app-patient-item>
     </p-scrollPanel>
   </div>
 </div>

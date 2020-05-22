@@ -1,7 +1,55 @@
+@import "src/global";
+
 .container {
   width: 100vw;
+
   .content {
     margin: 0 auto auto auto;
     width: 90vw;
   }
 }
+
+.ui-steps.sofa_steps {
+  &:before {
+    border: none !important;
+  }
+
+  .ui-steps-item {
+    width: 16.3%;
+
+    .ui-menuitem-link {
+      .ui-steps-number {
+        background-color: $background-light-color;
+        color: #135ba1;
+        display: inline-block;
+        border-radius: 50%;
+      }
+
+      .ui-steps-title {
+        color: $font-color-light;
+      }
+
+    }
+
+    &.ui-steps-current {
+      .ui-steps-number {
+        border: 2px black solid;
+      }
+    }
+
+    &.completedStep {
+      .ui-steps-number {
+        background-color: $primary;
+      }
+    }
+
+    &.notCompletedStep {
+      .ui-steps-number {
+        background-color: $secondary;
+      }
+    }
+  }
+}
+
+
+

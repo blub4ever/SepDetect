@@ -3,16 +3,38 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
 
-import {AlertService, AuthenticationService} from '@app/services';
+import {MessageService} from "primeng";
+import {AuthenticationService} from "@app/services";
 
 @Component({
   templateUrl: 'login.component.html',
   styleUrls: ['./login.component.scss']
 })
+/**
+ * LoginComponent, zeigt eine Seite für den Benutzerlogin
+ */
 export class LoginComponent implements OnInit {
+
+  /**
+   * FormGroup enthält die Input-Elemente
+   */
   form: FormGroup;
+
+  /**
+   * Wird wahr wenn der Submit-Button gedrückt wird und die Anfrage gegen das Backend läuft.
+   */
   loading = false;
+
+  /**
+   * Wird wahr wenn der Submit-Button gedrückt wird. Sind die Input-Felder nicht korrekt ausgefüllt, wird ein Fehler
+   * angezeigt.
+   */
   submitted = false;
+
+  /**
+   * Geht der User über eine andere Adresse als / auf die Webseite wird die Adresse hier zwischengespeichert.
+   * Sobald der Login erfolgreich war, wird der Benutzer wieder auf die ursprüngliche Seite weitergeleitet.
+   */
   returnUrl: string;
 
   constructor(
@@ -20,45 +42,50 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private alertService: AlertService
+    private messageService: MessageService
   ) {
   }
 
+  /**
+   * On Komponent Init
+   */
   ngOnInit() {
+    // baue form mit username und password
     this.form = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
 
-    // get return url from route parameters or default to '/'
+    // finde return url, default:  '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  // convenience getter for easy access to form fields
-  get f() {
-    return this.form.controls;
-  }
-
+  /**
+   * Methode wird beim abschicken des Login-Forms ausgeführt.
+   */
   onSubmit() {
     this.submitted = true;
 
-    // reset alerts on submit
-    this.alertService.clear();
-
-    // stop here if form is invalid
+    // stop, falls es Fehler beim Ausfüllen der Eingabefelder gab
     if (this.form.invalid) {
       return;
     }
 
+    // loading verhindert das erneute abschicken des Login-Forms
     this.loading = true;
-    this.authenticationService.login(this.f.username.value, this.f.password.value)
+    this.authenticationService.login(this.form.controls.username.value, this.form.controls.password.value)
       .pipe(first())
       .subscribe(
         data => {
           this.router.navigate([this.returnUrl]);
         },
         error => {
-          this.alertService.error(error);
+          // Fehleranzeige
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Login fehlgeschalgen',
+            detail: 'Passwort oder Benutzername stimmen nicht!'
+          });
           this.loading = false;
         });
   }

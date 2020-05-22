@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '@app/services';
-import {ApplicationService} from '@app/services/application.service';
 import {Router} from '@angular/router';
+import {AppNavigationService} from "@app/services/app-navigation.service";
 
 @Component({
   selector: 'app-patient-list-sidebar',
@@ -11,26 +11,9 @@ import {Router} from '@angular/router';
 export class PatientListSidebarComponent implements OnInit {
 
   constructor(
-    private authenticationService: AuthenticationService,
-    private router: Router,
-    private applicationService: ApplicationService) {
+    public nav: AppNavigationService) {
   }
 
   ngOnInit(): void {
-  }
-
-  closeOverlay(): void {
-    this.applicationService.showSidebar.emit(false);
-  }
-
-
-  goToEditPatient() {
-    this.router.navigate(['/patient/edit', 0]);
-    this.applicationService.showSidebar.emit(false);
-  }
-
-  logout() {
-    this.authenticationService.logout();
-    this.applicationService.showSidebar.emit(false);
   }
 }

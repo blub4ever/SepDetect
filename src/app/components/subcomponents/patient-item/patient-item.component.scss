@@ -1,8 +1,8 @@
 @import "src/global";
 
-.patientComponent{
+.patientComponent {
   width: 100%;
-  background: linear-gradient(90deg, $primary 15px, $input_background 15px);
+  background: linear-gradient(90deg, $primary 15px, $background-light-color 15px);
   color: black;
   border: 1px $input_border solid;
   padding-left: 20px;
@@ -11,7 +11,17 @@
   display: flex;
   flex-flow: column;
 
-  .bigFont{
+  .bigFont {
     font-size: 1.3em;
+  }
+
+  .nameContainer {
+
+    .cicon {
+      color: $secondary;
+      margin-right: 0.5em;
+      margin-top: 2px;
+      float: right;
+    }
   }
 }

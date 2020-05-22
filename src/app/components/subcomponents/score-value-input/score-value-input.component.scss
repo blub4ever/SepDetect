@@ -1,8 +1,9 @@
 @import "src/global";
 
 .component {
-  width: 100%;
-  background-color: $input_background;
+  width: 90vw;
+  height: 60vh;
+  background-color: $background-light-color;
   display: grid;
   grid-template-columns: 100%;
   color: black;

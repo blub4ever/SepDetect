@@ -1,35 +1,49 @@
-import {BrowserModule} from '@angular/platform-browser';
+import {BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig, HammerModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
+import * as Hammer from 'hammerjs';
 import {AppComponent} from './app.component';
-import {AlertComponent} from './components/alert/alert.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ErrorInterceptor, JwtInterceptor} from '@app/helpers';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from '@app/app.routing';
 import {LoginComponent} from '@app/components';
-import {fakeBackendProvider} from "@app/helpers/fake-backend-interceptor";
-import { PatientListComponent } from './components/main/patient-list/patient-list.component';
-import { HeaderComponent } from './components/header/header.component';
+import {PatientListComponent} from './components/main/patient-list/patient-list.component';
+import {HeaderComponent} from './components/header/header.component';
 import {
+  AccordionModule,
   ButtonModule,
-  CalendarModule, ChartModule, DropdownModule,
-  InputTextModule, RadioButtonModule,
+  CalendarModule, ChartModule, ConfirmationService, ConfirmDialogModule, DropdownModule,
+  InputTextModule, MessageService, RadioButtonModule,
   ScrollPanelModule,
   SidebarModule,
-  SlideMenuModule
+  SlideMenuModule, StepsModule, ToastModule
 } from 'primeng';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import { PatientItemComponent } from './components/subcomponents/patient-item/patient-item.component';
-import { PatientComponent } from './components/main/patient/patient.component';
-import { PatientEditFormComponent } from './components/subcomponents/patient-edit-form/patient-edit-form.component';
-import { PatientListSidebarComponent } from './components/sidebar/patient-list-sidebar/patient-list-sidebar.component';
-import { PatientViewSidebarComponent } from './components/sidebar/patient-view-sidebar/patient-view-sidebar.component';
-import { PatientEditComponent } from './components/main/patient-edit/patient-edit.component';
-import { ScoreValueInputComponent } from './components/subcomponents/score-value-input/score-value-input.component';
-import { ScoreValueItemComponent } from './components/subcomponents/score-value-item/score-value-item.component';
-import { ScoreValueEditSidebarComponent } from './components/sidebar/score-value-edit-sidebar/score-value-edit-sidebar.component';
+import {PatientItemComponent} from './components/subcomponents/patient-item/patient-item.component';
+import {PatientViewComponent} from './components/main/patient-view/patient-view.component';
+import {PatientEditFormComponent} from './components/subcomponents/patient-edit-form/patient-edit-form.component';
+import {PatientListSidebarComponent} from './components/sidebar/patient-list-sidebar/patient-list-sidebar.component';
+import {PatientViewSidebarComponent} from './components/sidebar/patient-view-sidebar/patient-view-sidebar.component';
+import {PatientEditComponent} from './components/main/patient-edit/patient-edit.component';
+import {ScoreValueInputComponent} from './components/subcomponents/score-value-input/score-value-input.component';
+import {ScoreValueItemComponent} from './components/subcomponents/score-value-item/score-value-item.component';
+import {ScoreValueEditSidebarComponent} from './components/sidebar/score-value-edit-sidebar/score-value-edit-sidebar.component';
 import {ScoreValueEditComponent} from "@app/components/main/score-value-edit/score-value-edit.component";
+import {AboutComponent} from './components/main/about/about.component';
+import {AboutSidebarComponent} from './components/sidebar/about-sidebar/about-sidebar.component';
+import {PatientEditSidebarComponent} from './components/sidebar/patient-edit-sidebar/patient-edit-sidebar.component';
+import {CarouselComponent} from './components/main/score-value-edit/carousel/carousel.component';
+import {CarouselItemElement} from "@app/components/main/score-value-edit/carousel-item-element";
+import {CarouselItemDirective} from "@app/components/main/score-value-edit/carousel/carousel-item-directive";
+import {ReversePipe} from "@app/helpers/reverse-pipe";
+
+export class HammerConfig extends HammerGestureConfig {
+  overrides = <any>{
+    swipe: {direction: Hammer.DIRECTION_ALL},
+    pinch: {enable: false},
+    rotate: {enable: false}
+  };
+}
 
 @NgModule({
   imports: [
@@ -47,16 +61,20 @@ import {ScoreValueEditComponent} from "@app/components/main/score-value-edit/sco
     SidebarModule,
     ChartModule,
     DropdownModule,
-    RadioButtonModule
+    RadioButtonModule,
+    ToastModule,
+    ConfirmDialogModule,
+    AccordionModule,
+    StepsModule,
+    HammerModule
   ],
   declarations: [
     AppComponent,
-    AlertComponent,
     LoginComponent,
     PatientListComponent,
     HeaderComponent,
     PatientItemComponent,
-    PatientComponent,
+    PatientViewComponent,
     PatientEditFormComponent,
     PatientListSidebarComponent,
     PatientViewSidebarComponent,
@@ -64,12 +82,21 @@ import {ScoreValueEditComponent} from "@app/components/main/score-value-edit/sco
     ScoreValueEditComponent,
     ScoreValueInputComponent,
     ScoreValueItemComponent,
-    ScoreValueEditSidebarComponent
+    ScoreValueEditSidebarComponent,
+    AboutComponent,
+    AboutSidebarComponent,
+    PatientEditSidebarComponent,
+    CarouselComponent,
+    CarouselItemDirective,
+    CarouselItemElement,
+    ReversePipe
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
-    fakeBackendProvider],
+    {provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig},
+    MessageService,
+    ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

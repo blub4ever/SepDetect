@@ -1,7 +1,7 @@
 export class ScoreValue {
   id: number;
   date: string;
-  poa: number;
+  pao: number;
   gcs: number;
   map: number;
   liver: number;

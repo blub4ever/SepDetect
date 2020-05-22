@@ -1,5 +1,5 @@
-<div class="patientComponent ui-corner-all" (click)="goToPatient()">
-  <label class="bigFont">{{patient.person.lastName}}, {{patient.person.lastName}}</label>
+<div class="patientComponent ui-corner-all">
+  <div class="nameContainer"><label class="bigFont">{{patient.person.lastName}}, {{patient.person.surname}}</label> <i *ngIf="!patient.active" class="pi pi-eye-slash cicon"></i></div>
   <label>Geb. {{patient.person.birthday}}</label>
-  <label>{{patient.room ? patient.room : '-'}}</label>
+  <label *ngIf="details">{{patient.room ? patient.room : '-'}}</label>
 </div>

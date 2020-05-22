@@ -2,8 +2,6 @@
 
 .container{
   padding-top: 30%;
-  height: 100vh;
-  width: 100vw;
 
   .content{
     margin: auto;
@@ -29,6 +27,12 @@
       margin: 7px;
       width: 60vw;
       align-self: center;
+      color: $font-color-dark;
     }
+  }
+
+  .invalid-feedback{
+    align-self: center;
+    color: $secondary;
   }
 }

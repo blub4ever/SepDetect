@@ -1,10 +1,13 @@
-<app-header></app-header>
+<app-header [pageTitle]="pageTitle"></app-header>
 <div class="container">
   <div class="content">
-    <app-patient-edit-form #patientEditForm></app-patient-edit-form>
+    <app-patient-edit-form #patientEditForm [patient]="patient"></app-patient-edit-form>
+    <p-scrollPanel [style]="{width: '100%', height: 'calc(100vh - 430px)'}" class="scroll" *ngIf="!patient.personId">
+      <app-patient-item [patient]="patient" *ngFor="let patient of proposedPatients" [details]="false" (click)="addDatabasePatient(patient)"></app-patient-item>
+    </p-scrollPanel>
   </div>
 </div>
 <div class="footer">
-  <button pButton label="Speichern" [style]="{width: '150px'}" (click)="createPatient()"></button>
-  <button pButton label="Abbrechen" [style]="{width: '150px'}" (click)="goToPatients()"></button>
+  <button pButton label="Speichern" [style]="{width: '150px'}" (click)="createOrEditPatient()"></button>
+  <button pButton label="Abbrechen" [style]="{width: '150px'}" (click)="abort()"></button>
 </div>

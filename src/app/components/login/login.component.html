@@ -5,17 +5,17 @@
         <label class="first">Sep</label>
         <label class="second">Detect</label>
       </div>
-      <input id="float-input1" type="text" pInputText formControlName="username" placeholder="Username"
-             [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
-      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-        <div *ngIf="f.username.errors.required">Username is required</div>
+      <input id="float-input1" type="text" pInputText formControlName="username" placeholder="Benutzername"
+             [ngClass]="{ 'is-invalid': submitted && form.controls.username.errors }">
+      <div *ngIf="submitted && form.controls.username.errors" class="invalid-feedback">
+        <div *ngIf="form.controls.username.errors.required">Username is required</div>
       </div>
       <input id="float-input2" type="password" pInputText formControlName="password" placeholder="Passwort"
-             [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
-      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-        <div *ngIf="f.password.errors.required">Password is required</div>
+             [ngClass]="{ 'is-invalid': submitted && form.controls.password.errors }">
+      <div *ngIf="submitted && form.controls.password.errors" class="invalid-feedback">
+        <div *ngIf="form.controls.password.errors.required">Password is required</div>
       </div>
-      <button pButton label="Login"></button>
+      <button pButton label="Login" [disabled]="loading"></button>
     </div>
   </form>
 </div>

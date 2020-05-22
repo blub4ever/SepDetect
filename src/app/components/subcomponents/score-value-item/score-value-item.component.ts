@@ -20,7 +20,6 @@ export class ScoreValueItemComponent implements OnInit {
 
   goToScoreEdit() {
     console.log(this.patient);
-    console.log(this.scoreValue);
     this.router.navigate(['score'], {queryParams: {scoreValueId: this.scoreValue.id, patientId: this.patient.personId}})
   }
 }

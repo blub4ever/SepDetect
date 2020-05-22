@@ -14,41 +14,31 @@ body {
   background-color: $background !important;
   border-color: $input_border !important;
 
-  .buttonElement {
-    width: 100%;
-    background: linear-gradient(90deg, $primary 15px, $input_background 15px);
-    font-size: 1.5em;
-    display: grid;
-    grid-template-columns: 100%;
-    align-content: center;
-    color: $font-color-dark !important;
-    padding-left: 30px;
-  }
-
-  .bottom {
+  .buttonContainer {
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 50px;
-  }
 
-  .bottom1 {
-    position: fixed;
-    left: 0;
-    bottom: 51px;
-    width: 100%;
-    height: 50px;
-  }
+    .buttonElement {
+      margin-top: 3px;
+      width: 100%;
+      height: 50px;
+      background: linear-gradient(90deg, $primary 15px, $background-light-color 15px);
+      font-size: 1.5em;
+      display: grid;
+      grid-template-columns: 100%;
+      align-content: center;
+      color: $font-color-dark !important;
+      padding-left: 30px;
+    }
 
-  .bottom2 {
-    position: fixed;
-    left: 0;
-    bottom: 102px;
-    width: 100%;
-    height: 50px;
+    .buttonSpacer {
+      margin-top: 3px;
+      width: 100%;
+      height: 2px;
+    }
   }
-
 }
 
 .footer {
@@ -62,8 +52,53 @@ body {
   grid-template-columns: 50% 50%;
   align-content: center;
 
-  button{
+  button {
     margin: auto;
     color: $font-color-dark;
   }
+}
+
+.ui-confirmdialog {
+
+  .ui-dialog-titlebar {
+    background: $background-light-color !important;
+    border-bottom: 0 !important;
+  }
+
+  .ui-dialog-content {
+    background: $background !important;
+    border-bottom: 0 !important;
+    border-top: 0 !important;
+
+    .ui-confirmdialog-message {
+      color: $font-color-light;
+    }
+  }
+
+  .ui-dialog-footer {
+    background: $background !important;
+    padding: 2px !important;
+    display: grid;
+    grid-template-columns: 50% 50%;
+
+    .ui-button {
+      margin: 0 0.1em;
+      color: $font-color-dark;
+    }
+
+    .ui-button-icon-left {
+      left: 20px;
+    }
+  }
+}
+
+.item {
+  padding: 0;
+  width: 300px;
+  height: 300px;
+  background-color: crimson;
+  color: #fff;
+  font-size: 50px;
+  line-height: 300px;
+  text-align: center;
 }
