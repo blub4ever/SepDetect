@@ -11,6 +11,7 @@ export class ScoreValueItemComponent implements OnInit {
 
   @Input() scoreValue: ScoreValue;
   @Input() patient: Patient;
+  @Input() disabled: boolean;
 
   constructor(private router: Router) {
   }
