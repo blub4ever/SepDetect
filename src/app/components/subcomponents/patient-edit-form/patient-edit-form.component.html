@@ -1,18 +1,21 @@
 <form [formGroup]="form" class="formContent">
   <input id="float-input1" type="text" pInputText placeholder="Nachname" class="inputFiled"
-         [ngClass]="{'invalid': submitted && form.controls.lastName.errors}" formControlName="lastName" >
+         [ngClass]="{'invalid': submitted && form.controls.lastName.errors}" formControlName="lastName">
   <input id="float-input2" type="text" pInputText placeholder="Vorname" class="inputFiled"
          [ngClass]="{'invalid': submitted && form.controls.surName.errors}" formControlName="surName">
   <input id="float-input4" type="text" pInputText formControlName="piz" placeholder="Piz" class="inputFiled"
          [ngClass]="{'invalid': submitted && form.controls.piz.errors}">
-  <p-calendar formControlName="birthday" [monthNavigator]="true" [yearNavigator]="true"  yearRange="1900:2050" [style]="{'width':'100%'}"
+  <p-calendar formControlName="birthday" [monthNavigator]="true" [yearNavigator]="true" yearRange="1900:2050"
+              [style]="{'width':'100%'}"
               [inputStyle]="{'width':'100%'}" class="inputFiled" placeholder="Geburtstag"
               [ngClass]="{'invalid': submitted && form.controls.birthday.errors}"></p-calendar>
   <p-dropdown [options]="genders" formControlName="gender" class="inputFiled" [style]="{'width':'100%'}"
               [ngClass]="{'invalid': submitted && form.controls.gender.errors}"></p-dropdown>
   <input id="float-input5" type="text" pInputText formControlName="room" placeholder="Raum" class="inputFiled"
+         *ngIf="!searchMode"
          [ngClass]="{'invalid': submitted && form.controls.room.errors}">
   <p-dropdown [options]="organizations" formControlName="organization" class="inputFiled" [style]="{'width':'100%'}"
+              *ngIf="!searchMode"
               [ngClass]="{'invalid': submitted && form.controls.organization.errors}">
   </p-dropdown>
 </form>

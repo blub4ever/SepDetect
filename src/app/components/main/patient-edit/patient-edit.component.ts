@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {AuthenticationService} from "@app/services";
 import {Organization, Patient, Person} from "@app/model";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -26,53 +26,50 @@ export class PatientEditComponent implements OnInit, AfterViewInit {
 
   proposedPatients: Patient[];
 
+  mode: EditMode = EditMode.NEW;
+
   constructor(
     private patientService: PatientService,
     private route: ActivatedRoute,
+    private router: Router,
     private messageService: MessageService,
     public nav: AppNavigationService) {
+
+    if (this.router.getCurrentNavigation().extras.state) {
+      this.pageTitle = "Patient bearbeiten"
+      this.patient = this.router.getCurrentNavigation().extras.state.patient;
+      this.mode = EditMode.EDIT
+    } else {
+      this.patient = new Patient();
+      this.patient.person = new Person();
+      this.mode = this.route.snapshot.queryParamMap.get('searchMode') != undefined ? EditMode.SEACH : EditMode.NEW;
+      this.pageTitle = this.route.snapshot.queryParamMap.get('searchMode') != undefined ? "Patient suchen" :"Patient anlegen";
+    }
   }
 
   ngOnInit(): void {
-    const patientId = Number(this.route.snapshot.queryParamMap.get('patientId'));
-
-    if (!patientId) {
-      this.pageTitle = "Patient anlegen"
-      this.patient = new Patient();
-      this.patient.person = new Person();
-    } else {
-      this.pageTitle = "Patient bearbeiten"
-      this.patientService.getPatient(patientId).subscribe(patient => {
-        this.patient = patient
-        const parts = patient.person.birthday.split("-");
-        const parsedDate = new Date(parseInt(parts[0], 10),
-          parseInt(parts[1], 10) - 1,
-          parseInt(parts[2], 10));
-        console.log(parsedDate)
-        this.patientEditForm.form.patchValue({
-          lastName: patient.person.lastName,
-          surName: patient.person.surname,
-          piz: patient.piz,
-          birthday: parsedDate,
-          gender: patient.person.gender,
-          room: patient.room,
-          organization: patient.organization
-        })
-      }, error => {
-        this.nav.goToPatients()
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Interner Fehler',
-          detail: 'Fehler beim laden des Patienten!'
-        });
-      })
-    }
-
-
   }
 
   ngAfterViewInit() {
-    if (!this.patient.personId) {
+    setTimeout(() => {
+      if (this.patient.personId) {
+        const parts = this.patient.person.birthday.split("-");
+        const parsedDate = new Date(parseInt(parts[0], 10),
+          parseInt(parts[1], 10) - 1,
+          parseInt(parts[2], 10));
+        this.patientEditForm.form.patchValue({
+          lastName: this.patient.person.lastName,
+          surName: this.patient.person.surname,
+          piz: this.patient.piz,
+          birthday: parsedDate,
+          gender: this.patient.person.gender,
+          room: this.patient.room,
+          organization: this.patient.organization
+        })
+      }
+    })
+
+    if (this.mode != EditMode.EDIT) {
       this.patientEditForm.form.valueChanges.pipe(
         debounce(() => interval(500)),
         flatMap(() => {
@@ -100,11 +97,11 @@ export class PatientEditComponent implements OnInit, AfterViewInit {
       this.patient.room = this.patientEditForm.form.controls.room.value;
       this.patient.organization = this.patientEditForm.form.controls.organization.value;
 
-      if (this.patient.personId) {
+      if (this.mode == EditMode.EDIT) {
         this.patientService.editPatient(this.patient).subscribe(patient => {
           this.nav.goToPatientView(patient.personId)
         })
-      } else {
+      } else if (this.mode == EditMode.NEW) {
         this.patientService.createPatient(this.patient).subscribe(patient => {
           this.nav.goToPatients();
         })
@@ -127,7 +124,6 @@ export class PatientEditComponent implements OnInit, AfterViewInit {
         detail: 'Patient konnte nicht dearchiviert werden!'
       });
     })
-
   }
 
   abort() {
@@ -137,4 +133,14 @@ export class PatientEditComponent implements OnInit, AfterViewInit {
       this.nav.goToPatients();
     }
   }
+
+  isSearchMode(): boolean {
+    return this.mode == EditMode.SEACH
+  }
+}
+
+enum EditMode {
+  SEACH,
+  NEW,
+  EDIT
 }

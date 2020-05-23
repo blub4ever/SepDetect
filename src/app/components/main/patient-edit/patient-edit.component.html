@@ -1,9 +1,11 @@
 <app-header [pageTitle]="pageTitle"></app-header>
 <div class="container">
   <div class="content">
-    <app-patient-edit-form #patientEditForm [patient]="patient"></app-patient-edit-form>
-    <p-scrollPanel [style]="{width: '100%', height: 'calc(100vh - 430px)'}" class="scroll" *ngIf="!patient.personId">
-      <app-patient-item [patient]="patient" *ngFor="let patient of proposedPatients" [details]="false" (click)="addDatabasePatient(patient)"></app-patient-item>
+    <app-patient-edit-form #patientEditForm [patient]="patient" [searchMode]="isSearchMode()"></app-patient-edit-form>
+    <p-scrollPanel [style]="{width: '100%', height: (isSearchMode() ? 'calc(100vh - 350px)' : 'calc(100vh - 430px)')}"
+                   class="scroll" *ngIf="!patient.personId">
+      <app-patient-item [patient]="patient" *ngFor="let patient of proposedPatients" [details]="false"
+                        (click)="addDatabasePatient(patient)"></app-patient-item>
     </p-scrollPanel>
   </div>
 </div>

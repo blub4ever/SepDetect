@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AppNavigationService} from "@app/services/app-navigation.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-patient-edit-sidebar',
@@ -8,7 +9,10 @@ import {AppNavigationService} from "@app/services/app-navigation.service";
 })
 export class PatientEditSidebarComponent implements OnInit {
 
-  constructor(public nav: AppNavigationService) {
+  constructor(public nav: AppNavigationService,
+              private router: Router) {
+    if (this.router.getCurrentNavigation().extras.state)
+      console.log(this.router.getCurrentNavigation().extras.state.patient)
   }
 
   ngOnInit(): void {

@@ -13,6 +13,7 @@ import {ScoreValueEditSidebarComponent} from "@app/components/sidebar/score-valu
 import {AboutComponent} from "@app/components/main/about/about.component";
 import {AboutSidebarComponent} from "@app/components/sidebar/about-sidebar/about-sidebar.component";
 import {PatientEditSidebarComponent} from "@app/components/sidebar/patient-edit-sidebar/patient-edit-sidebar.component";
+import {PatientSearchSidebarComponent} from "@app/components/sidebar/patient-search-sidebar/patient-search-sidebar.component";
 
 const routes: Routes = [
   {
@@ -82,6 +83,20 @@ const routes: Routes = [
         path: '',
         outlet: 'header-nav',
         component: AboutSidebarComponent
+      }
+    ]
+  },
+  {
+    path: 'patient/search', canActivate: [AuthGuard], children: [
+      {
+        path: '',
+        data: {title: 'Patient suchen', searchMode: true},
+        component: PatientEditComponent,
+      },
+      {
+        path: '',
+        outlet: 'header-nav',
+        component: PatientSearchSidebarComponent
       }
     ]
   },

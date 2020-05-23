@@ -36,6 +36,7 @@ import {CarouselComponent} from './components/main/score-value-edit/carousel/car
 import {CarouselItemElement} from "@app/components/main/score-value-edit/carousel-item-element";
 import {CarouselItemDirective} from "@app/components/main/score-value-edit/carousel/carousel-item-directive";
 import {ReversePipe} from "@app/helpers/reverse-pipe";
+import { PatientSearchSidebarComponent } from './components/sidebar/patient-search-sidebar/patient-search-sidebar.component';
 
 export class HammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -89,7 +90,8 @@ export class HammerConfig extends HammerGestureConfig {
     CarouselComponent,
     CarouselItemDirective,
     CarouselItemElement,
-    ReversePipe
+    ReversePipe,
+    PatientSearchSidebarComponent
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

@@ -30,6 +30,9 @@ export class PatientEditFormComponent implements OnInit {
   @Input("patient")
   patient: Patient;
 
+  @Input()
+  searchMode: boolean = false
+
   constructor(private formBuilder: FormBuilder,
               private authenticationService: AuthenticationService) {
   }
