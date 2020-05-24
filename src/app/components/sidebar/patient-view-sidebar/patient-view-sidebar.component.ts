@@ -4,6 +4,9 @@ import {ScoreValueService} from "@app/services/rest/score-value.service";
 import {PatientService} from "@app/services/rest/patient.service";
 import {ConfirmationService, MessageService} from "primeng";
 import {AppNavigationService} from "@app/services/app-navigation.service";
+import {Patient} from "@app/model";
+import {flatMap} from "rxjs/operators";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-patient-view-sidebar',
@@ -12,7 +15,9 @@ import {AppNavigationService} from "@app/services/app-navigation.service";
 })
 export class PatientViewSidebarComponent implements OnInit {
 
-  patientId: number;
+  patient: Patient;
+
+  reloadPatientRef: Subscription;
 
   constructor(
     public nav: AppNavigationService,
@@ -20,16 +25,26 @@ export class PatientViewSidebarComponent implements OnInit {
     private route: ActivatedRoute,
     private scoreValueService: ScoreValueService,
     private messageService: MessageService,
+    private router: Router,
     private confirmationService: ConfirmationService) {
+
+    if (this.router.getCurrentNavigation().extras.state) {
+      this.patient = this.router.getCurrentNavigation().extras.state.patient;
+    }
   }
 
   ngOnInit(): void {
-    this.patientId = Number(this.route.snapshot.queryParamMap.get('patientId'));
+    this.reloadPatientRef = this.nav.reloadPatient.subscribe(patient => {
+      this.patient = patient;
+    })
   }
 
   endSofaHistory() {
-    this.scoreValueService.endLastScore(this.patientId).subscribe(x => {
-      this.nav.reloadPatient.emit(true);
+    this.scoreValueService.endLastScore(this.patient.personId).pipe(
+      flatMap(() => {
+        return this.patientService.getPatient(this.patient.personId)
+      })).subscribe(patient => {
+      this.nav.reloadPatient.emit(patient);
       this.nav.showSidebar.emit(false);
       this.messageService.add({
         severity: 'success',
@@ -37,18 +52,17 @@ export class PatientViewSidebarComponent implements OnInit {
         detail: 'Der Verlauf wurde erfolgreich abgeschlossen!'
       });
     }, error => {
-      this.nav.reloadPatient.emit(true);
-      this.nav.showSidebar.emit(false);
+      this.nav.goToPatients();
       this.messageService.add({
         severity: 'error',
         summary: 'Interner Fehler',
-        detail: 'Fehler beim abschließen des Verlaufes, Verlauf bereits abgeschlossen!'
+        detail: 'Fehler beim abschließen des Verlaufes!'
       });
     })
   }
 
   inactivatePatient() {
-    this.patientService.togglePatientActiveStatus(this.patientId, false).subscribe(x => {
+    this.patientService.togglePatientActiveStatus(this.patient.personId, false).subscribe(x => {
       this.nav.goToPatients()
       this.messageService.add({
         severity: 'success',
@@ -75,7 +89,7 @@ export class PatientViewSidebarComponent implements OnInit {
       rejectLabel: "Abbrechen",
       message: 'Soll der Patient wirklich gelöscht werden?',
       accept: () => {
-        this.patientService.deletePatient(this.patientId).subscribe(x => {
+        this.patientService.deletePatient(this.patient.personId).subscribe(x => {
           this.nav.goToPatients()
           this.messageService.add({
             severity: 'success',
@@ -93,4 +107,30 @@ export class PatientViewSidebarComponent implements OnInit {
       }
     });
   }
+
+  isEndHistoryPossible(): boolean {
+    if (!this.patient)
+      return false;
+
+    let result = false;
+    for (const score of this.patient.scores) {
+      if (!score.completed)
+        result = true;
+    }
+    return result;
+  }
+
+  isPatientArchiveable(): boolean {
+    let result = true;
+    for (const score of this.patient.scores) {
+      if (!score.completed)
+        result = false;
+    }
+    return result;
+  }
+
+  ngOnDestroy() {
+    this.reloadPatientRef.unsubscribe();
+  }
+
 }

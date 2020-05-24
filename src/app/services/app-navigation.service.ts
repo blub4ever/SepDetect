@@ -3,6 +3,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AuthenticationService} from "@app/services/authentication.service";
 import {PatientService} from "@app/services/rest/patient.service";
 import {MessageService} from "primeng";
+import {flatMap} from "rxjs/operators";
+import {Patient, ScoreValue} from "@app/model";
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +20,13 @@ export class AppNavigationService {
 
   @Output() showSidebar: EventEmitter<boolean> = new EventEmitter();
 
-  @Output() reloadPatient: EventEmitter<boolean> = new EventEmitter();
+  @Output() reloadPatient: EventEmitter<Patient> = new EventEmitter();
 
-  goToEditScoreValue(scoreValueId: number, returnPatientId: number) {
-    this.router.navigate(['score'], {queryParams: {scoreValueId: scoreValueId, patientId: returnPatientId}});
+  goToEditScoreValue(returnPatient: Patient, scoreToEdit: ScoreValue) {
+    // this.router.navigate(['score'], {queryParams: {scoreValueId: scoreValueId, patientId: returnPatientId}});
+    this.router.navigate(['score'], {
+      state: {patient: returnPatient, scoreValue: scoreToEdit}
+    })
   }
 
   goToEditPatient(patientId: number) {
@@ -39,7 +44,6 @@ export class AppNavigationService {
   }
 
   goToNewPatient() {
-    // this.router.navigate(['/patient/edit'], {queryParams: {patientId: patientId}})
     this.router.navigate(['/patient/edit'])
   }
 
@@ -47,8 +51,19 @@ export class AppNavigationService {
     this.router.navigate(['patient/search'], {queryParams: {searchMode: true}});
   }
 
-  goToPatientView(patientId: number) {
-    this.router.navigate(['/patient'], {queryParams: {patientId: patientId}});
+  goToPatientView(patientId: number, queryParams = {}) {
+    this.patientService.getPatient(patientId).subscribe(p => {
+      // this.router.navigate(['/patient/edit'], {queryParams: {patientId: patientId}})
+      const extras = {state: {patient: p}, queryParams: queryParams};
+      this.router.navigate(['/patient'],extras)
+    }, error => {
+      this.goToPatients()
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Interner Fehler',
+        detail: 'Fehler beim laden des Patienten!'
+      });
+    })
   }
 
   goToPatients() {

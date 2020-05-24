@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AppNavigationService, AuthenticationService} from "@app/services";
 import {ScoreValueService} from "@app/services/rest/score-value.service";
 import {ConfirmationService, MessageService} from "primeng";
+import {Patient, ScoreValue} from "@app/model";
 
 @Component({
   selector: 'app-score-value-edit-sidebar',
@@ -11,19 +12,26 @@ import {ConfirmationService, MessageService} from "primeng";
 })
 export class ScoreValueEditSidebarComponent implements OnInit {
 
-  patientId: number;
-  scoreValueId: number;
+  patient: Patient;
+  scoreValue: ScoreValue;
 
   constructor(public nav: AppNavigationService,
               private route: ActivatedRoute,
               private messageService: MessageService,
+              private router: Router,
               private scoreValueService: ScoreValueService,
               private confirmationService: ConfirmationService) {
+    if (this.router.getCurrentNavigation().extras.state) {
+      this.patient = this.router.getCurrentNavigation().extras.state.patient;
+      if (!this.scoreValue) {
+        this.patient = this.router.getCurrentNavigation().extras.state.patient;
+      } else {
+        this.scoreValue = this.router.getCurrentNavigation().extras.state.scoreValue;
+      }
+    }
   }
 
   ngOnInit(): void {
-    this.scoreValueId = Number(this.route.snapshot.queryParamMap.get('scoreValueId'));
-    this.patientId = Number(this.route.snapshot.queryParamMap.get('patientId'));
   }
 
   deleteScoreValue() {
@@ -36,8 +44,8 @@ export class ScoreValueEditSidebarComponent implements OnInit {
       rejectLabel: "Abbrechen",
       message: 'Soll der SOFA-Eintrag wirklich gelöscht werden?',
       accept: () => {
-        this.scoreValueService.deleteScoreValue(this.scoreValueId).subscribe(x => {
-          this.nav.goToPatientView(this.patientId)
+        this.scoreValueService.deleteScoreValue(this.scoreValue.id).subscribe(x => {
+          this.nav.goToPatientView(this.patient.personId)
           this.messageService.add({
             severity: 'success',
             summary: 'SOFA-Eintrag gelöscht',
@@ -54,4 +62,10 @@ export class ScoreValueEditSidebarComponent implements OnInit {
       }
     });
   }
+
+
+  isScoreDeleteable(): boolean {
+    return !!this.scoreValue && !!this.scoreValue.id;
+  }
+
 }

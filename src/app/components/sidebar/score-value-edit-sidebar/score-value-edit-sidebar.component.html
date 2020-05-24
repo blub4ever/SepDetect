@@ -1,9 +1,9 @@
 <div class="buttonContainer">
-  <div class="buttonElement" (click)="deleteScoreValue()">
+  <div class="buttonElement" (click)="deleteScoreValue()" *ngIf="isScoreDeleteable()">
     Eintrag Löschen
   </div>
   <div class="buttonSpacer"></div>
-  <div class="buttonElement" (click)="nav.goToPatientView(patientId)">
+  <div class="buttonElement" (click)="nav.goToPatientView(patient.personId)">
     Patient
   </div>
   <div class="buttonElement" (click)="nav.goToPatients()">

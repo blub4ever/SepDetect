@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Patient, ScoreValue} from '@app/model';
 import {Router} from "@angular/router";
+import {AppNavigationService} from "@app/services";
 
 @Component({
   selector: 'app-score-value-item',
@@ -13,14 +14,17 @@ export class ScoreValueItemComponent implements OnInit {
   @Input() patient: Patient;
   @Input() disabled: boolean;
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private nav: AppNavigationService
+  ) {
   }
 
-  ngOnInit(): void {
+  ngOnInit()
+    :
+    void {
   }
 
   goToScoreEdit() {
-    console.log(this.patient);
-    this.router.navigate(['score'], {queryParams: {scoreValueId: this.scoreValue.id, patientId: this.patient.personId}})
+    this.nav.goToEditScoreValue(this.patient, this.scoreValue)
   }
 }

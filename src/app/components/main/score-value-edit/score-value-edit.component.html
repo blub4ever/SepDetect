@@ -40,6 +40,6 @@
 <div class="footer">
   <button pButton label="Speichern" [style]="{width: '150px'}" (click)="createNewScoreValue()"
           [disabled]="!saveAble"></button>
-  <button pButton label="Abbrechen" [style]="{width: '150px'}" (click)="nav.goToPatientView(patientId)"></button>
+  <button pButton label="Abbrechen" [style]="{width: '150px'}" (click)="nav.goToPatientView(patient.personId)"></button>
 </div>
 

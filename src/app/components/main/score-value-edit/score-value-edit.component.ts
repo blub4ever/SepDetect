@@ -11,15 +11,11 @@ import {
 } from '@angular/core';
 import {Patient, ScoreValue} from '@app/model';
 import {ActivatedRoute, Router} from "@angular/router";
-import {PatientEditFormComponent} from "@app/components/subcomponents/patient-edit-form/patient-edit-form.component";
 import {ScoreValueInputComponent} from "@app/components/subcomponents/score-value-input/score-value-input.component";
 import {ScoreValueService} from "@app/services/rest/score-value.service";
 import {MenuItem} from "primeng";
-import {CarouselItemDirective} from "@app/components/main/score-value-edit/carousel/carousel-item-directive";
-import {CarouselItemElement} from "@app/components/main/score-value-edit/carousel-item-element";
 import {AnimationBuilder, AnimationFactory, AnimationPlayer} from "@angular/animations";
 import {CarouselComponent} from "@app/components/main/score-value-edit/carousel/carousel.component";
-import {element} from "protractor";
 import {Subscription} from "rxjs";
 import {AppNavigationService} from "@app/services";
 
@@ -43,9 +39,7 @@ export class ScoreValueEditComponent implements OnInit, AfterViewInit {
 
   activeIndex: number = 0;
 
-  scoreValueId: number;
-
-  patientId: number;
+  patient: Patient;
 
   scoreValue: ScoreValue;
 
@@ -64,12 +58,15 @@ export class ScoreValueEditComponent implements OnInit, AfterViewInit {
   constructor(public nav: AppNavigationService,
               private builder: AnimationBuilder,
               private route: ActivatedRoute,
+              private router: Router,
               private scoreValueService: ScoreValueService) {
+    if (this.router.getCurrentNavigation().extras.state) {
+      this.patient = this.router.getCurrentNavigation().extras.state.patient;
+      this.scoreValue = this.router.getCurrentNavigation().extras.state.scoreValue;
+    }
   }
 
   ngOnInit(): void {
-    this.scoreValueId = Number(this.route.snapshot.queryParamMap.get('scoreValueId'));
-    this.patientId = Number(this.route.snapshot.queryParamMap.get('patientId'));
   }
 
   ngAfterViewInit(): void {
@@ -82,8 +79,8 @@ export class ScoreValueEditComponent implements OnInit, AfterViewInit {
         {label: '', styleClass: ''},
         {label: '', styleClass: ''}]
 
-      if (this.scoreValueId != 0) {
-        this.scoreValueService.getScoreValue(this.scoreValueId).subscribe(scoreValue => {
+      if (this.scoreValue) {
+        this.scoreValueService.getScoreValue(this.scoreValue.id).subscribe(scoreValue => {
           this.scoreValue = scoreValue;
           const tmpArr = this.scoreValues.toArray()
           tmpArr[ScoreValueEditComponent.INDEX_PAO]._value = String(scoreValue.pao);
@@ -176,13 +173,13 @@ export class ScoreValueEditComponent implements OnInit, AfterViewInit {
     this.scoreValue.krea = Number(tmpArr[ScoreValueEditComponent.INDEX_KREA].value)
     this.scoreValue.total = this.scoreValue.pao + this.scoreValue.gcs + this.scoreValue.map + this.scoreValue.liver + this.scoreValue.coagulation + this.scoreValue.krea
 
-    if (this.scoreValueId == 0) {
-      this.scoreValueService.createScoreValue(this.scoreValue, this.patientId).subscribe(scoreValue => {
-        this.nav.goToPatientView(this.patientId);
+    if (!this.scoreValue.id) {
+      this.scoreValueService.createScoreValue(this.scoreValue, this.patient.personId).subscribe(scoreValue => {
+        this.nav.goToPatientView(this.patient.personId, {checkSofaHistory: true});
       })
     } else {
       this.scoreValueService.editScoreValue(this.scoreValue).subscribe(scoreValue => {
-        this.nav.goToPatientView(this.patientId);
+        this.nav.goToPatientView(this.patient.personId, {checkSofaHistory: true});
       })
     }
   }
