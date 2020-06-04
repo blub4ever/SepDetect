@@ -92,6 +92,40 @@ body {
   }
 }
 
+.ui-dialog.warnDialog {
+  width: 90vw;
+
+  .ui-dialog-titlebar {
+    color: $font-color-dark;
+    font-size: 1.4em;
+    border-color: $background;
+    background-color: $secondary;
+
+    .ui-dialog-titlebar-icons {
+      display: none;
+    }
+  }
+
+  .ui-dialog-content {
+    color: $font-color-dark;
+    font-size: 1.2em;
+    border-color: $background;
+    background-color: $secondary;
+  }
+
+  .ui-dialog-footer {
+    color: $font-color-dark;
+    border-color: $background;
+    background-color: $secondary;
+    text-align: center;
+
+    button {
+      width: 50% !important;
+      color: $font-color-dark;
+    }
+  }
+}
+
 .item {
   padding: 0;
   width: 300px;

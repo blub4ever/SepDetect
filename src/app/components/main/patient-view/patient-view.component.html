@@ -11,3 +11,13 @@
     </p-scrollPanel>
   </div>
 </div>
+
+<p-dialog header="SOFA-Score Anstieg!" [(visible)]="displayWarningDialog" modal="true" styleClass="warnDialog"
+          closable="false">
+  Achtung. Der SOFA-Score ist um {{sofaScoreRise}} Punkte angestiegen! Im Falle einer bestehenden Infektion bzw. wahrscheinlichen
+  Infektion hat der Patient eine Sepsis. Bitte kontaktieren Sie umgehend die Intensivstation zur intensivmedizinischen
+  Beurteilung des Patienten.
+  <p-footer>
+    <button pButton label="Verstanden" (click)="acceptWarning()"></button>
+  </p-footer>
+</p-dialog>

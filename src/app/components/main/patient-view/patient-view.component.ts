@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Patient, Score} from '@app/model';
 import {ConfirmationService, MessageService, SelectItem} from 'primeng';
 import {PatientService} from '@app/services/rest/patient.service';
@@ -10,7 +10,7 @@ import {flatMap} from "rxjs/operators";
 @Component({
   selector: 'app-patient',
   templateUrl: './patient-view.component.html',
-  styleUrls: ['./patient-view.component.scss']
+  styleUrls: ['./patient-view.component.scss'],
 })
 export class PatientViewComponent implements OnInit {
 
@@ -26,6 +26,10 @@ export class PatientViewComponent implements OnInit {
   selectedScore: Score = new Score();
 
   reloadPatientRef: Subscription;
+
+  displayWarningDialog: boolean = false
+
+  sofaScoreRise: number = 0;
 
   options = {
     legend: {
@@ -62,7 +66,6 @@ export class PatientViewComponent implements OnInit {
               private confirmationService: ConfirmationService,
               private messageService: MessageService,
               public nav: AppNavigationService) {
-    this.selectedScore
     if (this.router.getCurrentNavigation().extras.state) {
       this.patient = this.router.getCurrentNavigation().extras.state.patient;
       this.loadPatient()
@@ -144,13 +147,16 @@ export class PatientViewComponent implements OnInit {
 
         if (this.route.snapshot.queryParamMap.get("checkSofaHistory") && score.values.length > 1) {
           if (score.values[score.values.length - 1].total - score.values[score.values.length - 2].total >= 2) {
-            this.confirmationService.confirm({
-              header: 'SOFA-Score Anstieg!',
-              defaultFocus: 'none',
-              rejectVisible: false,
-              acceptLabel: "Bestätigen",
-              message: `Der SOFA-Score ist im Verlauf von ${score.values[score.values.length - 1].total} auf  ${score.values[score.values.length - 2].total} angestiegen!`,
-            })
+            this.displayWarningDialog = true;
+            this.sofaScoreRise = score.values[score.values.length - 1].total - score.values[score.values.length - 2].total
+
+            // this.confirmationService.confirm({
+            //   header: 'SOFA-Score Anstieg!',
+            //   defaultFocus: 'none',
+            //   rejectVisible: false,
+            //   acceptLabel: "Bestätigen",
+            //   message: `Achtung. Der SOFA-Score ist um ${score.values[score.values.length - 1].total - score.values[score.values.length - 2].total} Punkte angestiegen! Im Falle einer bestehenden Infektion bzw. wahrscheinlichen Infektion hat der Patient eine Sepsis. Bitte kontaktieren Sie umgehend die Intensivstation zur intensivmedizinischen Beurteilung des Patienten.`
+            // })
           }
         }
 
@@ -180,8 +186,15 @@ export class PatientViewComponent implements OnInit {
         ],
       };
     }
+
+
   }
 
+  acceptWarning(){
+    this.displayWarningDialog = false;
+    this.sofaScoreRise = 0;
+    this.nav.goToPatientView(this.patient.personId)
+  }
 
   ngOnDestroy() {
     this.reloadPatientRef.unsubscribe();

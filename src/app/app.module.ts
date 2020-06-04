@@ -10,13 +10,13 @@ import {LoginComponent} from '@app/components';
 import {PatientListComponent} from './components/main/patient-list/patient-list.component';
 import {HeaderComponent} from './components/header/header.component';
 import {
-  AccordionModule,
-  ButtonModule,
-  CalendarModule, ChartModule, ConfirmationService, ConfirmDialogModule, DropdownModule,
-  InputTextModule, MessageService, RadioButtonModule,
-  ScrollPanelModule,
-  SidebarModule,
-  SlideMenuModule, StepsModule, ToastModule
+    AccordionModule,
+    ButtonModule,
+    CalendarModule, ChartModule, ConfirmationService, ConfirmDialogModule, DialogModule, DropdownModule,
+    InputTextModule, MessageService, RadioButtonModule,
+    ScrollPanelModule,
+    SidebarModule,
+    SlideMenuModule, StepsModule, ToastModule
 } from 'primeng';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {PatientItemComponent} from './components/subcomponents/patient-item/patient-item.component';
@@ -47,28 +47,29 @@ export class HammerConfig extends HammerGestureConfig {
 }
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    AppRoutingModule,
-    InputTextModule,
-    ButtonModule,
-    SlideMenuModule,
-    ScrollPanelModule,
-    CalendarModule,
-    SidebarModule,
-    ChartModule,
-    DropdownModule,
-    RadioButtonModule,
-    ToastModule,
-    ConfirmDialogModule,
-    AccordionModule,
-    StepsModule,
-    HammerModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        AppRoutingModule,
+        InputTextModule,
+        ButtonModule,
+        SlideMenuModule,
+        ScrollPanelModule,
+        CalendarModule,
+        SidebarModule,
+        ChartModule,
+        DropdownModule,
+        RadioButtonModule,
+        ToastModule,
+        ConfirmDialogModule,
+        AccordionModule,
+        StepsModule,
+        HammerModule,
+        DialogModule
+    ],
   declarations: [
     AppComponent,
     LoginComponent,

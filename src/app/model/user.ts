@@ -4,7 +4,8 @@ import {Organization} from './organization';
 export class User {
   personId: number;
   name: string;
-  pw: string;
+  pw: string
+  email: string;
   lastLogin: number;
   role: string;
   person: Person;
