@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://192.168.10.115:8081'
+  apiUrl: 'https://sepdetect.com/api'
 };
