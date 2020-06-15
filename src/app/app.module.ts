@@ -10,15 +10,15 @@ import {LoginComponent} from '@app/components';
 import {PatientListComponent} from './components/main/patient-list/patient-list.component';
 import {HeaderComponent} from './components/header/header.component';
 import {
-    AccordionModule,
-    ButtonModule,
-    CalendarModule, ChartModule, ConfirmationService, ConfirmDialogModule, DialogModule, DropdownModule,
-    InputTextModule, MessageService, RadioButtonModule,
-    ScrollPanelModule,
-    SidebarModule,
-    SlideMenuModule, StepsModule, ToastModule
+  AccordionModule,
+  ButtonModule,
+  CalendarModule, ChartModule, ConfirmationService, ConfirmDialogModule, DialogModule, DropdownModule,
+  InputTextModule, MessageService, RadioButtonModule,
+  ScrollPanelModule,
+  SidebarModule,
+  SlideMenuModule, StepsModule, ToastModule
 } from 'primeng';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {PatientItemComponent} from './components/subcomponents/patient-item/patient-item.component';
 import {PatientViewComponent} from './components/main/patient-view/patient-view.component';
 import {PatientEditFormComponent} from './components/subcomponents/patient-edit-form/patient-edit-form.component';
@@ -28,48 +28,51 @@ import {PatientEditComponent} from './components/main/patient-edit/patient-edit.
 import {ScoreValueInputComponent} from './components/subcomponents/score-value-input/score-value-input.component';
 import {ScoreValueItemComponent} from './components/subcomponents/score-value-item/score-value-item.component';
 import {ScoreValueEditSidebarComponent} from './components/sidebar/score-value-edit-sidebar/score-value-edit-sidebar.component';
-import {ScoreValueEditComponent} from "@app/components/main/score-value-edit/score-value-edit.component";
+import {ScoreValueEditComponent} from '@app/components/main/score-value-edit/score-value-edit.component';
 import {AboutComponent} from './components/main/about/about.component';
 import {AboutSidebarComponent} from './components/sidebar/about-sidebar/about-sidebar.component';
 import {PatientEditSidebarComponent} from './components/sidebar/patient-edit-sidebar/patient-edit-sidebar.component';
 import {CarouselComponent} from './components/main/score-value-edit/carousel/carousel.component';
-import {CarouselItemElement} from "@app/components/main/score-value-edit/carousel-item-element";
-import {CarouselItemDirective} from "@app/components/main/score-value-edit/carousel/carousel-item-directive";
-import {ReversePipe} from "@app/helpers/reverse-pipe";
-import { PatientSearchSidebarComponent } from './components/sidebar/patient-search-sidebar/patient-search-sidebar.component';
+import {CarouselItemElement} from '@app/components/main/score-value-edit/carousel-item-element';
+import {CarouselItemDirective} from '@app/components/main/score-value-edit/carousel/carousel-item-directive';
+import {ReversePipe} from '@app/helpers/reverse-pipe';
+import {PatientSearchSidebarComponent} from './components/sidebar/patient-search-sidebar/patient-search-sidebar.component';
 
 export class HammerConfig extends HammerGestureConfig {
-  overrides = <any>{
+  overrides = {
     swipe: {direction: Hammer.DIRECTION_ALL},
     pinch: {enable: false},
     rotate: {enable: false}
-  };
+  } as any;
 }
 
+/**
+ * Angular Modules
+ */
 @NgModule({
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        AppRoutingModule,
-        InputTextModule,
-        ButtonModule,
-        SlideMenuModule,
-        ScrollPanelModule,
-        CalendarModule,
-        SidebarModule,
-        ChartModule,
-        DropdownModule,
-        RadioButtonModule,
-        ToastModule,
-        ConfirmDialogModule,
-        AccordionModule,
-        StepsModule,
-        HammerModule,
-        DialogModule
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    InputTextModule,
+    ButtonModule,
+    SlideMenuModule,
+    ScrollPanelModule,
+    CalendarModule,
+    SidebarModule,
+    ChartModule,
+    DropdownModule,
+    RadioButtonModule,
+    ToastModule,
+    ConfirmDialogModule,
+    AccordionModule,
+    StepsModule,
+    HammerModule,
+    DialogModule
+  ],
   declarations: [
     AppComponent,
     LoginComponent,

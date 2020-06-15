@@ -1,4 +1,14 @@
+/**
+ * Organisation
+ */
 export class Organization {
+  /**
+   * Eindeutige ID
+   */
   id: number;
-  name : string;
+
+  /**
+   * Name der Organisation
+   */
+  name: string;
 }

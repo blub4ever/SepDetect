@@ -1,14 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from './model';
 import {AuthenticationService} from '@app/services';
-import {NavigationStart, Router} from "@angular/router";
-import {Subscription} from "rxjs";
-import {MessageService} from "primeng";
-import {AppNavigationService} from "@app/services/app-navigation.service";
+import {NavigationStart, Router} from '@angular/router';
+import {Subscription} from 'rxjs';
+import {MessageService} from 'primeng';
+import {AppNavigationService} from '@app/services/app-navigation.service';
 
 @Component({selector: 'app', templateUrl: 'app.component.html'})
 /**
- * Haupt App-Komponente
+ * Main App-Komponente, verwaltet die Sidebar
  */
 export class AppComponent implements OnInit {
 
@@ -22,19 +21,26 @@ export class AppComponent implements OnInit {
    */
   routeSubscription: Subscription;
 
+  /**
+   * Konstruktor, Varibalen werden per Autowire übergeben.
+   */
   constructor(
-    private nav : AppNavigationService,
+    private nav: AppNavigationService,
     private authenticationService: AuthenticationService,
     private router: Router,
     private messageService: MessageService) {
   }
 
+  /**
+   * Wird nach dem Initialisieren ausgeführt
+   */
   ngOnInit(): void {
+    // Subscription für show Sidebare events
     this.nav.showSidebar.subscribe(show => {
       this.sidebarVisible = show;
     });
 
-    // clear alerts on location change
+    // Alle Messages aufräumen und die Sidebar verstecken wenn per Routing eine andere Seite angesteuert wird.
     this.routeSubscription = this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
         this.messageService.clear();
@@ -43,12 +49,9 @@ export class AppComponent implements OnInit {
     });
   }
 
-  // unsubscribe to avoid memory leaks
+  // Unsubscribe
   ngOnDestroy() {
     this.routeSubscription.unsubscribe();
-  }
-
-  logout() {
-    this.authenticationService.logout();
+    this.nav.showSidebar.unsubscribe();
   }
 }

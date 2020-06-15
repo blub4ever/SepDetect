@@ -1,10 +1,35 @@
-import {ScoreValue} from "@app/model/score-value";
+import {ScoreValue} from '@app/model/score-value';
 
+/**
+ * SOFA-Verlauf
+ */
 export class Score {
-  id : number;
+  /**
+   * Eindeutige ID
+   */
+  id: number;
+
+  /**
+   * Start des SOFA-Verlaufes
+   */
   startDate: string;
+  /**
+   * Ende des SOFA-Veraufes
+   */
   endDate: string;
+
+  /**
+   * Sofa-Verlauf abgeschlossen
+   */
   completed: boolean;
+
+  /**
+   * Index in der Patienten-Score-Liste
+   */
   listOrder: number;
-  values : ScoreValue[];
+
+  /**
+   * Alle SOFA-Werte
+   */
+  values: ScoreValue[];
 }

@@ -1,6 +1,21 @@
+/**
+ * Person
+ */
 export class Person {
+  /**
+   * Nachname
+   */
   lastName: string;
+  /**
+   * Vorname
+   */
   surname: string;
+  /**
+   * Gender
+   */
   gender: string;
-  birthday : string;
+  /**
+   * Birthday
+   */
+  birthday: string;
 }

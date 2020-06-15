@@ -15,14 +15,22 @@ import {AboutSidebarComponent} from "@app/components/sidebar/about-sidebar/about
 import {PatientEditSidebarComponent} from "@app/components/sidebar/patient-edit-sidebar/patient-edit-sidebar.component";
 import {PatientSearchSidebarComponent} from "@app/components/sidebar/patient-search-sidebar/patient-search-sidebar.component";
 
+/**
+ * Routing Regeln für die Benutzernavigation
+ */
 const routes: Routes = [
+  /**
+   * Routing für Patientenliste
+   */
   {
     path: '', canActivate: [AuthGuard], children: [
+      // Main view
       {
         path: '',
         data: {title: 'Patienten'},
         component: PatientListComponent,
       },
+      // Navigation
       {
         path: '',
         outlet: 'header-nav',
@@ -30,13 +38,18 @@ const routes: Routes = [
       }
     ]
   },
+  /**
+   * Routing für Patientenübersicht
+   */
   {
     path: 'patient', canActivate: [AuthGuard], children: [
+      // Main view
       {
         path: '',
         data: {title: 'Patient'},
         component: PatientViewComponent,
       },
+      // Navigation
       {
         path: '',
         outlet: 'header-nav',
@@ -44,13 +57,18 @@ const routes: Routes = [
       }
     ]
   },
+  /**
+   * Routing für Patienten bearbeiten oder anlegen
+   */
   {
     path: 'patient/edit', canActivate: [AuthGuard], children: [
+      // Main view
       {
         path: '',
         data: {title: 'Patient anlegen/bearbeiten'},
         component: PatientEditComponent,
       },
+      // Navigation
       {
         path: '',
         outlet: 'header-nav',
@@ -58,13 +76,18 @@ const routes: Routes = [
       }
     ]
   },
+  /**
+   * Routing zum erstellen oder ändern eines SOFA-Scores
+   */
   {
     path: 'score', canActivate: [AuthGuard], children: [
+      // Main view
       {
         path: '',
         data: {title: 'Score bearbeiten'},
         component: ScoreValueEditComponent,
       },
+      // Navigation
       {
         path: '',
         outlet: 'header-nav',
@@ -74,11 +97,13 @@ const routes: Routes = [
   },
   {
     path: 'about', canActivate: [AuthGuard], children: [
+      // Main view
       {
         path: '',
         data: {title: 'Über diese App'},
         component: AboutComponent,
       },
+      // Navigation
       {
         path: '',
         outlet: 'header-nav',
@@ -86,13 +111,18 @@ const routes: Routes = [
       }
     ]
   },
+  /**
+   * Routing für die Patientensuche
+   */
   {
     path: 'patient/search', canActivate: [AuthGuard], children: [
+      // Main view
       {
         path: '',
         data: {title: 'Patient suchen', searchMode: true},
         component: PatientEditComponent,
       },
+      // Navigation
       {
         path: '',
         outlet: 'header-nav',
@@ -100,14 +130,16 @@ const routes: Routes = [
       }
     ]
   },
+  // Routing für die Loginseite
   {path: 'login', component: LoginComponent},
-  // otherwise redirect to home
-  {path: '**', redirectTo: ''}
+  // Trifft keine Regel zu zurück zum Login
+  {path: '**', redirectTo: 'login'}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule {
 }
