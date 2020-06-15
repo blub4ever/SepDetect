@@ -187,6 +187,10 @@ export class PatientViewComponent implements OnInit {
     }
   }
 
+  onScoreChange() {
+    this.drawScoreHistory(this.selectedScore)
+  }
+
   acceptWarning() {
     this.displayWarningDialog = false;
     this.sofaScoreRise = 0;
