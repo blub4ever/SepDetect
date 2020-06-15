@@ -3,6 +3,9 @@ import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {filter, map, mergeMap} from "rxjs/operators";
 import {AppNavigationService} from "@app/services/app-navigation.service";
 
+/**
+ * Header Komponente
+ */
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

@@ -5,6 +5,9 @@ import {catchError} from 'rxjs/operators';
 
 import {AuthenticationService} from '@app/services';
 
+/**
+ * Error-Interceptor, wird ausgeführt wenn ein Json-Request einen Fehler wirft.
+ */
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
   constructor(private authenticationService: AuthenticationService) {
@@ -13,7 +16,7 @@ export class ErrorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(catchError(err => {
       if (err.status === 401 || err.status === 403) {
-        // auto logout if 401 response returned from api
+        // auto logout 401 oder 403
         this.authenticationService.logout();
       }
 

@@ -10,6 +10,7 @@
   </div>
 </div>
 <div class="footer">
-  <button pButton label="Speichern" [style]="{width: '150px'}" (click)="createOrEditPatient()"></button>
-  <button pButton label="Abbrechen" [style]="{width: '150px'}" (click)="abort()"></button>
+  <button pButton label="Speichern" [style]="{width: '150px'}" (click)="createOrEditPatient()" class="save" *ngIf="!isSearchMode()"></button>
+  <button pButton label="Abbrechen" [style]="{width: '150px'}" (click)="abort()" class="back" *ngIf="!isSearchMode()"></button>
+  <button pButton label="Abbrechen" [style]="{width: '90%'}" (click)="abort()" class="backfull" *ngIf="isSearchMode()"></button>
 </div>

@@ -6,7 +6,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 /**
- * Rest Service für SOFA-Scores. Ermöglich das Erstellen und Manipulieren von SOFA-Einträgen.
+ * Rest Service für SOFA-Scores. Ermöglicht das Erstellen und Manipulieren von SOFA-Einträgen.
  */
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,7 @@ export class ScoreValueService extends AbstractHttpService {
   }
 
   /**
-   * Ermöglicht das nächträgliche verändern von SOFA-Scores.
+   * Ermöglicht das nachträgliche verändern von SOFA-Scores.
    * @param scoreValue SOFA-Score Objekt mit passender ID.
    */
   editScoreValue(scoreValue: ScoreValue): Observable<ScoreValue> {
@@ -47,7 +47,7 @@ export class ScoreValueService extends AbstractHttpService {
   }
 
   /**
-   * Schließt einen SOFA-Score-Veraluf ab
+   * Schließt einen SOFA-Score-Verlauf ab
    * @param scoreId ID des SOFA-Verlaufs
    */
   endScore(scoreId: number): Observable<Score> {
@@ -64,7 +64,7 @@ export class ScoreValueService extends AbstractHttpService {
 
   /**
    * Löscht einen SOFA-Score Eintrag aus einem Verlauf.
-   * @param scoreValueId ID des Eintrages
+   * @param scoreValueId ID des Eintrags
    */
   deleteScoreValue(scoreValueId: number) {
     return this.http.delete<string>(`${environment.apiUrl}/score/value/delete/${scoreValueId}`);

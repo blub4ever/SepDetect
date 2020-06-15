@@ -34,7 +34,7 @@ export class User {
    */
   person: Person;
   /**
-   * Eindeutiger Token vom Backend, verhinder doppelten Login.
+   * Eindeutiger Token vom Backend, verhindert doppelten Login.
    */
   token: string;
   /**

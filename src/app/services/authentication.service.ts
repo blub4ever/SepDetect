@@ -25,7 +25,7 @@ export class AuthenticationService {
   public user: Observable<UserAuth>;
 
   /**
-   * Konstruktor, Varibalen werden per Autowire übergeben.
+   * Konstruktor, Variablen werden per Autowire übergeben.
    */
   constructor(
     private router: Router,

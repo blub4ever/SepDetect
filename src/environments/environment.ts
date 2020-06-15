@@ -1,5 +1,5 @@
 /**
- * Umgebung für entwichlungs Einsatz
+ * Umgebung für entwicklungs Einsatz
  */
 export const environment = {
   production: false,

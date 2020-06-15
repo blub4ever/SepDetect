@@ -3,6 +3,9 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '
 
 import {AuthenticationService} from '@app/services';
 
+/**
+ * Klasse wird bei jeder Anfrage aktiviert und überprüft ob der User eingeloggt ist.
+ */
 @Injectable({providedIn: 'root'})
 export class AuthGuard implements CanActivate {
   constructor(
@@ -11,6 +14,7 @@ export class AuthGuard implements CanActivate {
   ) {
   }
 
+
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const user = this.authenticationService.userAuth;
     if (user) {
@@ -18,7 +22,7 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    // not logged in so redirect to login page with the return url
+    // nicht eingeloggt, navigiere zur Login-Page
     this.router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
     return false;
   }

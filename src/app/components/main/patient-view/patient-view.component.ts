@@ -77,7 +77,6 @@ export class PatientViewComponent implements OnInit {
       this.patient = patient;
       this.loadPatient();
     })
-
   }
 
   loadPatient() {
@@ -93,6 +92,14 @@ export class PatientViewComponent implements OnInit {
     if (this.patient.scores.length > 0) {
       const score = this.patient.scores[this.patient.scores.length - 1];
       this.selectedScore = score;
+      this.drawScoreHistory(score)
+    } else {
+      this.drawScoreHistory(null)
+    }
+  }
+
+  drawScoreHistory(score: Score) {
+    if (score && score.values.length > 0) {
 
       const tlabels = new Array(score.values.length);
       const datatsets = [];
@@ -149,14 +156,6 @@ export class PatientViewComponent implements OnInit {
           if (score.values[score.values.length - 1].total - score.values[score.values.length - 2].total >= 2) {
             this.displayWarningDialog = true;
             this.sofaScoreRise = score.values[score.values.length - 1].total - score.values[score.values.length - 2].total
-
-            // this.confirmationService.confirm({
-            //   header: 'SOFA-Score Anstieg!',
-            //   defaultFocus: 'none',
-            //   rejectVisible: false,
-            //   acceptLabel: "Bestätigen",
-            //   message: `Achtung. Der SOFA-Score ist um ${score.values[score.values.length - 1].total - score.values[score.values.length - 2].total} Punkte angestiegen! Im Falle einer bestehenden Infektion bzw. wahrscheinlichen Infektion hat der Patient eine Sepsis. Bitte kontaktieren Sie umgehend die Intensivstation zur intensivmedizinischen Beurteilung des Patienten.`
-            // })
           }
         }
 
@@ -186,11 +185,9 @@ export class PatientViewComponent implements OnInit {
         ],
       };
     }
-
-
   }
 
-  acceptWarning(){
+  acceptWarning() {
     this.displayWarningDialog = false;
     this.sofaScoreRise = 0;
     this.nav.goToPatientView(this.patient.personId)

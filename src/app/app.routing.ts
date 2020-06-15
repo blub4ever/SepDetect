@@ -132,8 +132,8 @@ const routes: Routes = [
   },
   // Routing für die Loginseite
   {path: 'login', component: LoginComponent},
-  // Trifft keine Regel zu zurück zum Login
-  {path: '**', redirectTo: 'login'}
+  // Trifft keine Regel zu zurück zur Patientenübersicht
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({

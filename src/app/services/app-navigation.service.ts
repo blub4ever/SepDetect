@@ -7,8 +7,8 @@ import {flatMap} from "rxjs/operators";
 import {Patient, ScoreValue} from "@app/model";
 
 /**
- * Navigations-Objekt für die gesammte App. Ermgölicht es ein einfaches Navigieren von allen Komponenten, die dieses
- * Objekt verwendetn.
+ * Navigations-Objekt für die gerammte App. Ermöglicht es ein einfaches Navigieren von allen Komponenten, die dieses
+ * Objekt verwenden.
  */
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ import {Patient, ScoreValue} from "@app/model";
 export class AppNavigationService {
 
   /**
-   * Konstruktor, Varibalen werden per Autowire übergeben.
+   * Konstruktor, Variablen werden per Autowire übergeben.
    */
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -26,7 +26,7 @@ export class AppNavigationService {
   }
 
   /**
-   * Eventlistener für die Sidebar. Wenn true emitted wird, wird die Sidebar angezeigt.
+   * Event-Listener für die Sidebar. Wenn true emitted wird, wird die Sidebar angezeigt.
    */
   @Output() showSidebar: EventEmitter<boolean> = new EventEmitter();
 
@@ -37,9 +37,9 @@ export class AppNavigationService {
 
   /**
    * Navigiert den Benutzer zur SOFA-SCORE Edit Komponente.
-   * @param returnPatient Patient zu dem der SOFA-Score gehört und zu dem der Benutzer nach dem editieren eiens SOFA-Scores
+   * @param returnPatient Patient zu dem der SOFA-Score gehört und zu dem der Benutzer nach dem editieren eines SOFA-Scores
    * wieder zurück geführt werden soll.
-   * @param scoreToEdit SOFA-Score der berarbeitet werden soll. Soll ein neuer Score erstellt werden muss hier ein neues
+   * @param scoreToEdit SOFA-Score der bearbeitet werden soll. Soll ein neuer Score erstellt werden muss hier ein neues
    * Objekt übergeben werden.
    */
   goToEditScoreValue(returnPatient: Patient, scoreToEdit: ScoreValue) {
@@ -50,7 +50,7 @@ export class AppNavigationService {
 
   /**
    * Navigiert zur Patienten bearbeiten Komponente.
-   * @param patientId ID des Patienten der angezeit werden soll.
+   * @param patientId ID des Patienten der angezeigt werden soll.
    */
   goToEditPatient(patientId: number) {
     this.patientService.getPatient(patientId).subscribe(p => {
@@ -84,7 +84,7 @@ export class AppNavigationService {
    * Navigiert zur Patientenübersich.
    * @param patientId ID des Patienten
    * @param queryParams Bestimmte Parameter die der URL angehängt werden sollen. Z.B. {checkSofaHistory: true} (durch
-   * diesen Parameter wird eine Überprüfung des SOFA-Score Anstieges ausgelöst.
+   * diesen Parameter wird eine Überprüfung des SOFA-Score Anstieg ausgelöst.
    */
   goToPatientView(patientId: number, queryParams = {}) {
     this.patientService.getPatient(patientId).subscribe(p => {
@@ -116,7 +116,7 @@ export class AppNavigationService {
   }
 
   /**
-   * Fürht ein Logout druch und navigiert zur Login-Page.
+   * Führt ein Logout durch und navigiert zur Login-Page.
    */
   logout() {
     this.authenticationService.logout();

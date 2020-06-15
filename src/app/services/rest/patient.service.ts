@@ -57,11 +57,11 @@ export class PatientService extends AbstractHttpService {
   }
 
   /**
-   * Sucht nach Patienten anhand von den gegeben Paramentern. Soll ein parameter ignoriert werden muss null übergeben werden.
-   * Werden mehrer Paramter übergeben werden diese per und verknüpft.
+   * Sucht nach Patienten anhand von den gegeben Parametern. Soll ein parameter ignoriert werden muss null übergeben werden.
+   * Werden mehrer Parameter übergeben werden diese per und verknüpft.
    * @param lastName Nachname
    * @param surname Vorname
-   * @param birthday Geburstag
+   * @param birthday Geburtstag
    * @param gender Geschlecht
    */
   findPatients(lastName: string, surname: string, birthday: string, gender: string): Observable<Patient[]> {

@@ -13,7 +13,7 @@ export const environment = {
   production: true,
 
   /**
-   * Backend-URL, kann entweder hier fest gestzt werden oder in assests/config.ts. Sollte die zweite
+   * Backend-URL, kann entweder hier fest gesetzt werden oder in assests/config.ts. Sollte die zweite
    * Möglichkeit verwendet werden, muss _apiUrl leer bleiben.
    */
   _apiUrl: '',

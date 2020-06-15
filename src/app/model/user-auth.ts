@@ -1,7 +1,7 @@
 import {User} from '@app/model/user';
 
 /**
- * Auth-Objekt vom Bakcend
+ * Auth-Objekt vom Backend
  */
 export class UserAuth {
   /**

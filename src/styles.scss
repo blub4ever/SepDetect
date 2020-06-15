@@ -50,11 +50,25 @@ body {
 
   display: grid;
   grid-template-columns: 50% 50%;
+  grid-template-areas: "right left";
   align-content: center;
 
   button {
     margin: auto;
     color: $font-color-dark;
+  }
+
+  .save {
+    grid-area: right;
+  }
+
+  .back {
+    grid-area: left;
+  }
+
+  .backfull {
+    grid-column-start: 1;
+    grid-column-end: 3;
   }
 }
 

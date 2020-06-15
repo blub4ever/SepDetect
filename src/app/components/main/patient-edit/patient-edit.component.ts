@@ -43,7 +43,7 @@ export class PatientEditComponent implements OnInit, AfterViewInit {
       this.patient = new Patient();
       this.patient.person = new Person();
       this.mode = this.route.snapshot.queryParamMap.get('searchMode') != undefined ? EditMode.SEACH : EditMode.NEW;
-      this.pageTitle = this.route.snapshot.queryParamMap.get('searchMode') != undefined ? "Patient suchen" :"Patient anlegen";
+      this.pageTitle = this.route.snapshot.queryParamMap.get('searchMode') != undefined ? "Patient suchen" : "Patient anlegen";
     }
   }
 
@@ -110,20 +110,29 @@ export class PatientEditComponent implements OnInit, AfterViewInit {
   }
 
   addDatabasePatient(patient: Patient) {
-    this.patientService.togglePatientActiveStatus(patient.personId, true).subscribe(x => {
-      this.nav.goToPatients()
+    if (!patient.active) {
+      this.patientService.togglePatientActiveStatus(patient.personId, true).subscribe(x => {
+        this.nav.goToPatients()
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Patient dearchivert',
+          detail: `Der Patient (${patient.person.lastName}, ${patient.person.surname}) wurde erfolgreich dearchivert!`
+        });
+      }, error => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Interner Fehler',
+          detail: 'Patient konnte nicht dearchiviert werden!'
+        });
+      })
+    } else {
       this.messageService.add({
-        severity: 'success',
-        summary: 'Patient dearchivert',
-        detail: `Der Patient (${patient.person.lastName}, ${patient.person.surname}) wurde erfolgreich dearchivert!`
+        severity: 'info',
+        summary: 'Patient aktiv',
+        detail: 'Der Patient ist bereits aktiv!'
       });
-    }, error => {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Interner Fehler',
-        detail: 'Patient konnte nicht dearchiviert werden!'
-      });
-    })
+      this.nav.goToPatients();
+    }
   }
 
   abort() {

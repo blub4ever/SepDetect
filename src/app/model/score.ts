@@ -14,7 +14,7 @@ export class Score {
    */
   startDate: string;
   /**
-   * Ende des SOFA-Veraufes
+   * Ende des SOFA-Verlaufs
    */
   endDate: string;
 

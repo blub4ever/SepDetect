@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   sidebarVisible: boolean;
 
   /**
-   * Routing Subsciption, wird für unsubscribe beim Zerstören der Komponente benötigt.
+   * Routing Subscription, wird für unsubscribe beim Zerstören der Komponente benötigt.
    */
   routeSubscription: Subscription;
 
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
    * Wird nach dem Initialisieren ausgeführt
    */
   ngOnInit(): void {
-    // Subscription für show Sidebare events
+    // Subscription für show Sidebar events
     this.nav.showSidebar.subscribe(show => {
       this.sidebarVisible = show;
     });

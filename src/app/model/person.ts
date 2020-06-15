@@ -15,7 +15,7 @@ export class Person {
    */
   gender: string;
   /**
-   * Birthday
+   * Geburtstag
    */
   birthday: string;
 }
