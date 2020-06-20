@@ -33,7 +33,7 @@ import {AboutComponent} from './components/main/about/about.component';
 import {AboutSidebarComponent} from './components/sidebar/about-sidebar/about-sidebar.component';
 import {PatientEditSidebarComponent} from './components/sidebar/patient-edit-sidebar/patient-edit-sidebar.component';
 import {CarouselComponent} from './components/main/score-value-edit/carousel/carousel.component';
-import {CarouselItemElement} from '@app/components/main/score-value-edit/carousel-item-element';
+import {CarouselItemElement} from '@app/components/main/score-value-edit/carousel/carousel-item-element';
 import {CarouselItemDirective} from '@app/components/main/score-value-edit/carousel/carousel-item-directive';
 import {ReversePipe} from '@app/helpers/reverse-pipe';
 import {PatientSearchSidebarComponent} from './components/sidebar/patient-search-sidebar/patient-search-sidebar.component';

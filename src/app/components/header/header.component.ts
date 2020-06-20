@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
-import {filter, map, mergeMap} from "rxjs/operators";
-import {AppNavigationService} from "@app/services/app-navigation.service";
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {filter, map, mergeMap} from 'rxjs/operators';
+import {AppNavigationService} from '@app/services/app-navigation.service';
 
 /**
  * Header Komponente
@@ -14,12 +14,13 @@ import {AppNavigationService} from "@app/services/app-navigation.service";
 export class HeaderComponent implements OnInit {
 
   @Input()
-  pageTitle: string = '';
+  pageTitle = '';
+
   @Input()
-  pageTitle2: string = '';
+  pageTitle2 = '';
 
   constructor(private activeRoute: ActivatedRoute,
-              private nav : AppNavigationService,
+              private nav: AppNavigationService,
               private router: Router) {
   }
 
@@ -28,8 +29,8 @@ export class HeaderComponent implements OnInit {
   }
 
   private setTitleFromRouteData(routeData) {
-    if (routeData && routeData['title'] && this.pageTitle == undefined) {
-      this.pageTitle = routeData['title'];
+    if (routeData && routeData.title && this.pageTitle == undefined) {
+      this.pageTitle = routeData.title;
     }
   }
 
