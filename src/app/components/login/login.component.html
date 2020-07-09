@@ -1,20 +1,26 @@
 <div class="container">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="content">
+      <!-- Logo -->
       <div class="logo">
         <label class="first">Sep</label>
         <label class="second">Detect</label>
       </div>
+      <!-- Name -->
       <input id="float-input1" type="text" pInputText formControlName="username" placeholder="Benutzername"
              [ngClass]="{ 'is-invalid': submitted && form.controls.username.errors }">
+      <!-- Name Error -->
       <div *ngIf="submitted && form.controls.username.errors" class="invalid-feedback">
         <div *ngIf="form.controls.username.errors.required">Username is required</div>
       </div>
+      <!-- Passwort -->
       <input id="float-input2" type="password" pInputText formControlName="password" placeholder="Passwort"
              [ngClass]="{ 'is-invalid': submitted && form.controls.password.errors }">
+      <!-- Passwort Error -->
       <div *ngIf="submitted && form.controls.password.errors" class="invalid-feedback">
         <div *ngIf="form.controls.password.errors.required">Password is required</div>
       </div>
+      <!-- Login Button-->
       <button pButton label="Login" [disabled]="loading"></button>
     </div>
   </form>

@@ -1,14 +1,16 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
-import {AuthenticationService} from "@app/services";
-import {Organization, Patient, Person} from "@app/model";
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Patient, Person} from "@app/model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PatientEditFormComponent} from "@app/components/subcomponents/patient-edit-form/patient-edit-form.component";
 import {PatientService} from "@app/services/rest/patient.service";
 import {AppNavigationService} from "@app/services/app-navigation.service";
 import {MessageService} from "primeng";
 import {debounce, flatMap} from "rxjs/operators";
-import {interval} from "rxjs";
+import {interval, Subscription} from "rxjs";
 
+/**
+ * Patienten Edit Komponente, kann sowohl zum Erstellen, zum Bearbeiten, als auch zum Bearbeiten eines Patienten verwendet werden.
+ */
 @Component({
   selector: 'app-patient-edit',
   templateUrl: './patient-edit.component.html',
@@ -16,18 +18,44 @@ import {interval} from "rxjs";
 })
 export class PatientEditComponent implements OnInit, AfterViewInit {
 
-
+  /**
+   * Form Komponente, enthält Referenz zur Sub-Komponente mit Eingabefeldern.
+   */
   @ViewChild("patientEditForm")
-  private patientEditForm: PatientEditFormComponent
+  private patientEditForm: PatientEditFormComponent;
 
+  /**
+   * Seiten Titel, Edit oder New
+   */
   pageTitle: string = "";
 
+  /**
+   * Patient der bearbeitet werden soll
+   */
   patient: Patient;
 
+  /**
+   * Ähnliche Patenten, wird nur befüllt wenn EditMode = New ist (neuer Patient erstellen)
+   */
   proposedPatients: Patient[];
 
+  /**
+   * Modus der Komponente, entweder New zum Erstellen eines neuen Patienten, Search für die Suche oder Edit zum Bearbeiten
+   */
   mode: EditMode = EditMode.NEW;
 
+  /**
+   * Subscription für die Suche
+   */
+  searchSubscription: Subscription;
+
+  /**
+   * Konstruktor setzt den Modus der Komponente. Wir ein Patient mit dem Routing übergeben, wird die Komponente in den
+   * Edit Modus gesetzt, andernfalls wird ein neues Patienten-Objekt erstellt und die Komponente wird in den New Modus
+   * versetzt. Wird im Routing der Parameter searchMode gesetzt und der Parameter searchMode der URL angehängt, läuft
+   * die Komponente im SeachMOde
+   * Parameter werden per Autowire gesetzt.
+   */
   constructor(
     private patientService: PatientService,
     private route: ActivatedRoute,
@@ -35,14 +63,19 @@ export class PatientEditComponent implements OnInit, AfterViewInit {
     private messageService: MessageService,
     public nav: AppNavigationService) {
 
+    // wird patient übergeben = Edit
     if (this.router.getCurrentNavigation().extras.state) {
-      this.pageTitle = "Patient bearbeiten"
+      // setzt Page Titel für Edit
+      this.pageTitle = "Patient bearbeiten";
       this.patient = this.router.getCurrentNavigation().extras.state.patient;
       this.mode = EditMode.EDIT
     } else {
+      // Neuer Patient
       this.patient = new Patient();
       this.patient.person = new Person();
+      // setzt Search or New Mode
       this.mode = this.route.snapshot.queryParamMap.get('searchMode') != undefined ? EditMode.SEACH : EditMode.NEW;
+      // Setzte Titel für Search or New Mode
       this.pageTitle = this.route.snapshot.queryParamMap.get('searchMode') != undefined ? "Patient suchen" : "Patient anlegen";
     }
   }
@@ -50,9 +83,15 @@ export class PatientEditComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Wird nach dem die UI-Initialisiert ist ausgeführt. ngOnInit kann hier nicht verwendet werden, da der Patient
+   * ggf noch nicht gesetzt wurde.
+   */
   ngAfterViewInit() {
+    // workaround, da sonst die Daten nicht in der UI angezeigt werden
     setTimeout(() => {
       if (this.patient.personId) {
+        // setzte Patienten-Daten wenn Patient eine ID hat = Patient ist nicht neu
         const parts = this.patient.person.birthday.split("-");
         const parsedDate = new Date(parseInt(parts[0], 10),
           parseInt(parts[1], 10) - 1,
@@ -67,10 +106,11 @@ export class PatientEditComponent implements OnInit, AfterViewInit {
           organization: this.patient.organization
         })
       }
-    })
+    });
 
+    // Wenn nicht im Edit Mode, wird automatisch gesucht, wenn Eingabefelder sich ändern.
     if (this.mode != EditMode.EDIT) {
-      this.patientEditForm.form.valueChanges.pipe(
+      this.searchSubscription = this.patientEditForm.form.valueChanges.pipe(
         debounce(() => interval(500)),
         flatMap(() => {
           return this.patientService.findPatients(this.patientEditForm.form.controls.lastName.value,
@@ -79,7 +119,6 @@ export class PatientEditComponent implements OnInit, AfterViewInit {
             this.patientEditForm.form.controls.gender.value)
         })
       ).subscribe(patients => {
-        console.log(patients)
         this.proposedPatients = patients
       }, error => {
         console.log(error)
@@ -87,6 +126,9 @@ export class PatientEditComponent implements OnInit, AfterViewInit {
     }
   }
 
+  /**
+   *
+   */
   createOrEditPatient() {
     if (this.patientEditForm.submit()) {
       this.patient.person.surname = this.patientEditForm.form.controls.surName.value;
@@ -145,6 +187,13 @@ export class PatientEditComponent implements OnInit, AfterViewInit {
 
   isSearchMode(): boolean {
     return this.mode == EditMode.SEACH
+  }
+
+  // Unsubscribe
+  ngOnDestroy() {
+    // nicht im Edit Mode
+    if (this.searchSubscription)
+      this.searchSubscription.unsubscribe();
   }
 }
 

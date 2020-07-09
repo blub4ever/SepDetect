@@ -22,6 +22,11 @@ export class AppComponent implements OnInit {
   routeSubscription: Subscription;
 
   /**
+   * Routing Subscription, für die Sidebar
+   */
+  sidebarSubscription: Subscription;
+
+  /**
    * Konstruktor, Varibalen werden per Autowire übergeben.
    */
   constructor(
@@ -36,7 +41,7 @@ export class AppComponent implements OnInit {
    */
   ngOnInit(): void {
     // Subscription für show Sidebar events
-    this.nav.showSidebar.subscribe(show => {
+    this.sidebarSubscription = this.nav.showSidebar.subscribe(show => {
       this.sidebarVisible = show;
     });
 
@@ -52,6 +57,6 @@ export class AppComponent implements OnInit {
   // Unsubscribe
   ngOnDestroy() {
     this.routeSubscription.unsubscribe();
-    this.nav.showSidebar.unsubscribe();
+    this.sidebarSubscription.unsubscribe();
   }
 }

@@ -1,38 +1,45 @@
 @import "./src/global.scss";
 
-.content{
+// content css grid
+.content {
   width: 100vw;
   height: $header_height;
   display: grid;
   grid-template-columns: 80vw 20vw;
   grid-template-rows: 35px 40px;
-  grid-template-areas:
-    "logo buttons"
-    "current buttons";
+  grid-template-areas: "logo buttons" "current buttons";
 
+  // logo
   .logo {
     margin-left: 5px;
     grid-area: logo;
     font-size: 1.5em;
     align-self: center;
-    .first{
+
+    // Erster Abschnitt Logo
+    .first {
       color: $primary;
     }
-    .second{
+
+    // Zweiter Abschnitt Logo
+    .second {
       color: $secondary;
     }
   }
 
-  .title{
+  // Titel
+  .title {
     margin-left: 5px;
     color: $font-color-light;
 
-    .subTitle{
+    // Sub-Titel
+    .subTitle {
       font-size: 0.8em;
     }
   }
 
-  .header-content{
+  // Button Area, rechts
+  .header-content {
     grid-area: buttons;
     justify-self: right;
     align-self: center;

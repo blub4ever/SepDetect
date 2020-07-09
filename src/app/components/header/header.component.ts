@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {filter, map, mergeMap} from 'rxjs/operators';
-import {AppNavigationService} from '@app/services/app-navigation.service';
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
+import {filter, map, mergeMap} from "rxjs/operators";
+import {AppNavigationService} from "@app/services/app-navigation.service";
 
 /**
  * Header Komponente
@@ -13,46 +13,69 @@ import {AppNavigationService} from '@app/services/app-navigation.service';
 })
 export class HeaderComponent implements OnInit {
 
+  /**
+   * Page Main Titel
+   */
   @Input()
-  pageTitle = '';
+  pageTitle: string = '';
+  @Input()
+  pageTitle2: string = '';
 
-  @Input()
-  pageTitle2 = '';
+  /**
+   * Routing Subscription
+   */
+  routingSubscription: Subscription;
 
   constructor(private activeRoute: ActivatedRoute,
               private nav: AppNavigationService,
               private router: Router) {
   }
 
+  /**
+   * On Komponent Init
+   */
   ngOnInit(): void {
     this.subscribeToRouteChangeEvents();
   }
 
+  /**
+   * Setzte Seitentitel wenn dieser in der Routing-Tabelle hinterlegt ist. Wird nur gesetzt, wenn manuell kein
+   * Seitentitel gesetzt wurde.
+   * @param routeData Routing Data
+   */
   private setTitleFromRouteData(routeData) {
-    if (routeData && routeData.title && this.pageTitle == undefined) {
-      this.pageTitle = routeData.title;
+    if (routeData && routeData['title'] && this.pageTitle == undefined) {
+      this.pageTitle = routeData['title'];
     }
   }
 
-  private getLatestChild(route) {
+  /**
+   * Gibt das letzte Routing Child zurück.
+   * @param route Router
+   */
+  private static getLatestChild(route) {
     while (route.firstChild) {
       route = route.firstChild;
     }
     return route;
   }
 
+  /**
+   * Subscription für Routing Change Events
+   */
   private subscribeToRouteChangeEvents() {
-
-    // Set initial title
-    const latestRoute = this.getLatestChild(this.activeRoute);
+    // Setzte initialen Titel
+    const latestRoute = HeaderComponent.getLatestChild(this.activeRoute);
     if (latestRoute) {
       this.setTitleFromRouteData(latestRoute.data.getValue());
     }
 
-    this.router.events.pipe(
+    // subscription für Routing-Events, zum setzten des Titels aus Routing Data
+    this.routingSubscription = this.router.events.pipe(
+      // Filtert Routing End events
       filter(event => event instanceof NavigationEnd),
       map(() => this.activeRoute),
-      map((route) => this.getLatestChild(route)),
+      map((route) => HeaderComponent.getLatestChild(route)),
       filter((route) => route.outlet === 'primary'),
       mergeMap((route) => route.data),
     ).subscribe((event) => {
@@ -60,7 +83,15 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  /**
+   * Zeigt die Sidebar
+   */
   public showSidebar() {
     this.nav.showSidebar.emit(true);
+  }
+
+  // Unsubscribe
+  ngOnDestroy() {
+    this.routingSubscription.unsubscribe();
   }
 }
