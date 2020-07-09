@@ -5,6 +5,10 @@ import {ScoreValueService} from "@app/services/rest/score-value.service";
 import {ConfirmationService, MessageService} from "primeng";
 import {Patient, ScoreValue} from "@app/model";
 
+
+/**
+ * Navigationskomponente für die SOFA-Score Edit Ansicht
+ */
 @Component({
   selector: 'app-score-value-edit-sidebar',
   templateUrl: './score-value-edit-sidebar.component.html',
@@ -12,7 +16,14 @@ import {Patient, ScoreValue} from "@app/model";
 })
 export class ScoreValueEditSidebarComponent implements OnInit {
 
+  /**
+   * aktueller Patient
+   */
   patient: Patient;
+
+  /**
+   * Akteuller Sofa-Score
+   */
   scoreValue: ScoreValue;
 
   constructor(public nav: AppNavigationService,
@@ -34,6 +45,9 @@ export class ScoreValueEditSidebarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Löscht den aktuellen Sofa Score
+   */
   deleteScoreValue() {
     // schließe sidbar manuell, da sie sonst über dem Confirm-Dialog liegt.
     this.nav.showSidebar.emit(false);
@@ -63,7 +77,9 @@ export class ScoreValueEditSidebarComponent implements OnInit {
     });
   }
 
-
+  /**
+   * Gibt True zurück wenn der Sofa-Score gelöscht werden kann
+   */
   isScoreDeleteable(): boolean {
     return !!this.scoreValue && !!this.scoreValue.id;
   }

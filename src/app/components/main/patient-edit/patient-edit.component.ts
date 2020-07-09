@@ -8,9 +8,6 @@ import {MessageService} from "primeng";
 import {debounce, flatMap} from "rxjs/operators";
 import {interval, Subscription} from "rxjs";
 
-/**
- * Patienten Edit Komponente, kann sowohl zum Erstellen, zum Bearbeiten, als auch zum Bearbeiten eines Patienten verwendet werden.
- */
 @Component({
   selector: 'app-patient-edit',
   templateUrl: './patient-edit.component.html',
@@ -127,7 +124,7 @@ export class PatientEditComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   *
+   *  Erstellt einen neuen Patienten oder speichert geänderte Daten. Abhängig vom aktuellen Modus
    */
   createOrEditPatient() {
     if (this.patientEditForm.submit()) {
@@ -151,6 +148,10 @@ export class PatientEditComponent implements OnInit, AfterViewInit {
     }
   }
 
+  /**
+   * Aktiviert eine Patientenvorschlag, wenn dieser beim erstellen eines neuen Patienten ausgewählt wurde.
+   * @param patient
+   */
   addDatabasePatient(patient: Patient) {
     if (!patient.active) {
       this.patientService.togglePatientActiveStatus(patient.personId, true).subscribe(x => {
@@ -177,6 +178,9 @@ export class PatientEditComponent implements OnInit, AfterViewInit {
     }
   }
 
+  /**
+   * Bricht das erstellen/editieren ab, geht zur Patientenübersicht zurück
+   */
   abort() {
     if (this.patient.personId) {
       this.nav.goToPatientView(this.patient.personId)
@@ -185,6 +189,9 @@ export class PatientEditComponent implements OnInit, AfterViewInit {
     }
   }
 
+  /**
+   * Gibt true zurück, wenn Komponente im Search Mod
+   */
   isSearchMode(): boolean {
     return this.mode == EditMode.SEACH
   }

@@ -3,6 +3,9 @@ import {Patient} from '@app/model';
 import {Router} from '@angular/router';
 import {AppNavigationService} from "@app/services";
 
+/**
+ * Komponente für die Anzeige eines Patienten in einer Liste. Hat die Form eines kleines Rechecks
+ */
 @Component({
   selector: 'app-patient-item',
   templateUrl: './patient-item.component.html',
@@ -10,9 +13,15 @@ import {AppNavigationService} from "@app/services";
 })
 export class PatientItemComponent implements OnInit {
 
+  /*+
+  Patient
+   */
   @Input()
   patient: Patient;
 
+  /**
+   * Zeigt mehr details an wenn true
+   */
   @Input()
   details: boolean = true
 
@@ -22,6 +31,10 @@ export class PatientItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Listen für externe onClick events
+   * @param e
+   */
   @HostListener('click', ['$event'])
   onClick(e) {
   }

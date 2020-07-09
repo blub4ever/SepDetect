@@ -4,13 +4,19 @@ import {PatientService} from "@app/services/rest/patient.service";
 import {Router} from "@angular/router";
 import {AppNavigationService} from "@app/services";
 
+/**
+ * Diese Komponente listet alle aktiven Patienten auf.
+ */
 @Component({
   selector: 'app-patient-list',
   templateUrl: './patient-list.component.html',
   styleUrls: ['./patient-list.component.scss']
 })
-export class PatientListComponent implements OnInit, AfterViewInit {
+export class PatientListComponent implements AfterViewInit {
 
+  /**
+   * Liste der aktiven Patienten
+   */
   patients: Patient[] = [];
 
   constructor(
@@ -19,9 +25,9 @@ export class PatientListComponent implements OnInit, AfterViewInit {
     private router: Router) {
   }
 
-  ngOnInit(): void {
-  }
-
+  /**
+   * Lädt list der aktive Patienten
+   */
   ngAfterViewInit() {
     // viewChild is set after the view has been initialized
     console.log('AfterViewInit');
@@ -29,9 +35,4 @@ export class PatientListComponent implements OnInit, AfterViewInit {
       this.patients = patients;
     })
   }
-
-  test(){
-    console.log('test')
-  }
-
 }

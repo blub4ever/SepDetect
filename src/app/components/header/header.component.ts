@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {filter, map, mergeMap} from "rxjs/operators";
 import {AppNavigationService} from "@app/services/app-navigation.service";
+import {Subscription} from "rxjs";
 
 /**
  * Header Komponente
@@ -13,11 +14,9 @@ import {AppNavigationService} from "@app/services/app-navigation.service";
 })
 export class HeaderComponent implements OnInit {
 
-  /**
-   * Page Main Titel
-   */
   @Input()
-  pageTitle: string = '';
+  pageTitle = '';
+
   @Input()
   pageTitle2: string = '';
 
@@ -32,16 +31,16 @@ export class HeaderComponent implements OnInit {
   }
 
   /**
-   * On Komponent Init
+   * Subscription to rooting events
    */
   ngOnInit(): void {
     this.subscribeToRouteChangeEvents();
   }
 
   /**
-   * Setzte Seitentitel wenn dieser in der Routing-Tabelle hinterlegt ist. Wird nur gesetzt, wenn manuell kein
-   * Seitentitel gesetzt wurde.
-   * @param routeData Routing Data
+   * Sets den Titel der HeaderKomponente, wenn pageTitel gesetzt wird dieser genommen, andernfalls der, der in den
+   * routing Informationen angeben wurde.
+   * @param routeData
    */
   private setTitleFromRouteData(routeData) {
     if (routeData && routeData['title'] && this.pageTitle == undefined) {
@@ -50,8 +49,8 @@ export class HeaderComponent implements OnInit {
   }
 
   /**
-   * Gibt das letzte Routing Child zurück.
-   * @param route Router
+   * Gibt das letzte Kind des Routing Trees zurück
+   * @param route
    */
   private static getLatestChild(route) {
     while (route.firstChild) {
@@ -61,7 +60,7 @@ export class HeaderComponent implements OnInit {
   }
 
   /**
-   * Subscription für Routing Change Events
+   * Subscription to rooting events
    */
   private subscribeToRouteChangeEvents() {
     // Setzte initialen Titel
