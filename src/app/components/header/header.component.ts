@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {filter, map, mergeMap} from "rxjs/operators";
 import {AppNavigationService} from "@app/services/app-navigation.service";
-import {Subscription} from "rxjs";
 
 /**
  * Header Komponente
@@ -19,10 +18,6 @@ export class HeaderComponent implements OnInit {
    */
   @Input()
   pageTitle: string = '';
-
-  /**
-   * Page Sub-Titel
-   */
   @Input()
   pageTitle2: string = '';
 

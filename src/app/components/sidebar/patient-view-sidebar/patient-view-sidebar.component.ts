@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ScoreValueService} from "@app/services/rest/score-value.service";
 import {PatientService} from "@app/services/rest/patient.service";
@@ -8,15 +8,24 @@ import {Patient} from "@app/model";
 import {flatMap} from "rxjs/operators";
 import {Subscription} from "rxjs";
 
+/**
+ * Navigationskomponente für PatientenView
+ */
 @Component({
   selector: 'app-patient-view-sidebar',
   templateUrl: './patient-view-sidebar.component.html',
   styleUrls: ['./patient-view-sidebar.component.scss']
 })
-export class PatientViewSidebarComponent implements OnInit {
+export class PatientViewSidebarComponent implements OnInit, OnDestroy {
 
+  /**
+   * Aktueller Patient
+   */
   patient: Patient;
 
+  /**
+   * Reload Patient Subscription
+   */
   reloadPatientRef: Subscription;
 
   constructor(
@@ -28,15 +37,20 @@ export class PatientViewSidebarComponent implements OnInit {
     private router: Router,
     private confirmationService: ConfirmationService) {
 
+    // setzte aktuellen Patienen
     if (this.router.getCurrentNavigation().extras.state) {
       this.patient = this.router.getCurrentNavigation().extras.state.patient;
     }
   }
 
+  /**
+   * On Komponent Init
+   */
   ngOnInit(): void {
+    // reload Patient Event
     this.reloadPatientRef = this.nav.reloadPatient.subscribe(patient => {
       this.patient = patient;
-    })
+    });
   }
 
   endSofaHistory() {

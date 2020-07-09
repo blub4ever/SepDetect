@@ -1,28 +1,36 @@
 <div class="buttonContainer">
+  <!-- SOFA Score -->
   <div class="buttonElement" (click)="nav.goToEditScoreValue(patient,null)">
     SOFA-Score eintragen
   </div>
+  <!-- SOFA Verlauf -->
   <div class="buttonElement" (click)="endSofaHistory()" *ngIf="isEndHistoryPossible()">
     SOFA-Verlauf beenden
   </div>
   <div class="buttonSpacer"></div>
+  <!-- Patient Edit -->
   <div class="buttonElement" (click)="nav.goToEditPatient(patient.personId)">
     Patient bearbeiten
   </div>
+  <!-- Patient Archive -->
   <div class="buttonElement" (click)="inactivatePatient()" *ngIf="isPatientArchiveable()">
     Patient archivieren
   </div>
+  <!-- Patient Delete -->
   <div class="buttonElement" (click)="deletePatient()">
     Patient löschen
   </div>
   <div class="buttonSpacer"></div>
+  <!-- Patient Liste -->
   <div class="buttonElement" (click)="nav.goToPatients()">
     Patienten Liste
   </div>
   <div class="buttonSpacer"></div>
+  <!-- About -->
   <div class="buttonElement" (click)="nav.goToAbout()">
     About
   </div>
+  <!-- Logout -->
   <div class="buttonElement" (click)="nav.logout()">
     Logout
   </div>

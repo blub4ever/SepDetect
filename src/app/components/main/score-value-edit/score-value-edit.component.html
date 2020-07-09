@@ -2,6 +2,7 @@
 <div class="container">
   <div class="content">
 
+    <!-- SOFA-SCORE-Items, im Carousel -->
     <carousel #carouselComponent>
       <app-score-value-input id="'0'" titel="PaO<sub>2</sub>/FiO<sub>2</sub>" [option0]="'> 400'" *carouselItem
                              [option1]="'< 400'"
@@ -32,14 +33,17 @@
                              [option4]="'> 5 mg/dl'" #score_input></app-score-value-input>
     </carousel>
 
+    <!-- STEP Display -->
     <p-steps [model]="items" [readonly]="false" [(activeIndex)]="activeIndex" styleClass="sofa_steps"
              (activeIndexChange)="onActiveIndexChanged($event)"></p-steps>
   </div>
 </div>
 
 <div class="footer">
+  <!-- Save Button, nur möglich wenn alle Items ausgefüllt wurden -->
   <button pButton label="Speichern" [style]="{width: '150px'}" (click)="createNewScoreValue()"
           [disabled]="!saveAble"></button>
+  <!-- Abort Button -->
   <button pButton label="Abbrechen" [style]="{width: '150px'}" (click)="nav.goToPatientView(patient.personId)"></button>
 </div>
 

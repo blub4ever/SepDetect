@@ -1,5 +1,8 @@
-import {Directive, TemplateRef} from "@angular/core";
+import {Directive, TemplateRef} from '@angular/core';
 
+/**
+ * ItemDirective für die CarouselItem
+ */
 @Directive({
   selector: '[carouselItem]'
 })
